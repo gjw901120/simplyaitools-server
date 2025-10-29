@@ -1,0 +1,425 @@
+2025-10-14 09:22:24,980  INFO 12234 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 12234 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 09:22:24,983  INFO 12234 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "${AI_PROJECT_ENV}"
+2025-10-14 09:22:25,739  INFO 12234 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 09:22:25,741  INFO 12234 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 09:22:25,754  INFO 12234 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2025-10-14 09:22:25,861  WARN 12234 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 09:22:25,926  INFO 12234 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 09:22:26,660  INFO 12234 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 09:22:26,667  INFO 12234 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 09:22:26,668  INFO 12234 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 09:22:26,765  INFO 12234 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 09:22:26,766  INFO 12234 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1711 ms
+2025-10-14 09:22:26,819  WARN 12234 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 09:22:26,821  INFO 12234 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 09:22:26,851  INFO 12234 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 09:22:26,877 ERROR 12234 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 09:32:18,611  INFO 12381 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 12381 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 09:32:18,613  INFO 12381 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "${AI_PROJECT_ENV}"
+2025-10-14 09:32:19,148  INFO 12381 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 09:32:19,150  INFO 12381 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 09:32:19,160  INFO 12381 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2025-10-14 09:32:19,244  WARN 12381 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 09:32:19,301  INFO 12381 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 09:32:19,895  INFO 12381 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 09:32:19,902  INFO 12381 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 09:32:19,903  INFO 12381 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 09:32:19,990  INFO 12381 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 09:32:19,991  INFO 12381 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1331 ms
+2025-10-14 09:32:20,033  WARN 12381 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 09:32:20,035  INFO 12381 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 09:32:20,057  INFO 12381 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 09:32:20,070 ERROR 12381 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 09:36:30,749  INFO 12456 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 12456 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 09:36:30,750  INFO 12456 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "${AI_PROJECT_ENV}"
+2025-10-14 09:36:31,312  INFO 12456 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 09:36:31,314  INFO 12456 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 09:36:31,323  INFO 12456 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2025-10-14 09:36:31,399  WARN 12456 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 09:36:31,451  INFO 12456 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 09:36:31,976  INFO 12456 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 09:36:31,984  INFO 12456 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 09:36:31,984  INFO 12456 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 09:36:32,073  INFO 12456 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 09:36:32,073  INFO 12456 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1279 ms
+2025-10-14 09:36:32,117  WARN 12456 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 09:36:32,119  INFO 12456 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 09:36:32,140  INFO 12456 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 09:36:32,152 ERROR 12456 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 09:41:13,906  INFO 12607 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 12607 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 09:41:13,910  INFO 12607 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "${AI_PROJECT_ENV}"
+2025-10-14 09:41:14,477  INFO 12607 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 09:41:14,479  INFO 12607 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 09:41:14,487  INFO 12607 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2025-10-14 09:41:14,562  WARN 12607 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 09:41:14,613  INFO 12607 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 09:41:15,140  INFO 12607 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 09:41:15,148  INFO 12607 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 09:41:15,148  INFO 12607 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 09:41:15,236  INFO 12607 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 09:41:15,236  INFO 12607 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1282 ms
+2025-10-14 09:41:15,279  WARN 12607 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 09:41:15,281  INFO 12607 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 09:41:15,302  INFO 12607 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 09:41:15,315 ERROR 12607 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 09:44:29,609  INFO 12766 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 12766 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 09:44:29,611  INFO 12766 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "${AI_PROJECT_ENV}"
+2025-10-14 09:44:30,203  INFO 12766 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 09:44:30,205  INFO 12766 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 09:44:30,217  INFO 12766 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2025-10-14 09:44:30,328  WARN 12766 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 09:44:30,394  INFO 12766 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 09:44:30,992  INFO 12766 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 09:44:30,999  INFO 12766 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 09:44:30,999  INFO 12766 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 09:44:31,086  INFO 12766 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 09:44:31,087  INFO 12766 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1430 ms
+2025-10-14 09:44:31,135  WARN 12766 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 09:44:31,137  INFO 12766 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 09:44:31,158  INFO 12766 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 09:44:31,172 ERROR 12766 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 09:51:04,334  INFO 12903 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 12903 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 09:51:04,335  INFO 12903 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "${AI_PROJECT_ENV}"
+2025-10-14 09:51:04,902  INFO 12903 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 09:51:04,903  INFO 12903 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 09:51:04,913  INFO 12903 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2025-10-14 09:51:04,983  WARN 12903 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 09:51:05,032  INFO 12903 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 09:51:05,521  INFO 12903 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 09:51:05,528  INFO 12903 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 09:51:05,529  INFO 12903 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 09:51:05,614  INFO 12903 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 09:51:05,615  INFO 12903 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1233 ms
+2025-10-14 09:51:05,660  WARN 12903 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 09:51:05,662  INFO 12903 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 09:51:05,684  INFO 12903 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 09:51:05,696 ERROR 12903 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 10:07:36,947  INFO 13188 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 13188 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 10:07:36,950  INFO 13188 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "${AI_PROJECT_ENV}"
+2025-10-14 10:07:37,522  INFO 13188 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 10:07:37,524  INFO 13188 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 10:07:37,534  INFO 13188 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2025-10-14 10:07:37,611  WARN 13188 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 10:07:37,661  INFO 13188 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 10:07:38,174  INFO 13188 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 10:07:38,182  INFO 13188 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 10:07:38,182  INFO 13188 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 10:07:38,271  INFO 13188 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 10:07:38,271  INFO 13188 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1277 ms
+2025-10-14 10:07:38,315  WARN 13188 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 10:07:38,318  INFO 13188 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 10:07:38,339  INFO 13188 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 10:07:38,351 ERROR 13188 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 10:09:07,739  INFO 13219 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 13219 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 10:09:07,741  INFO 13219 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "env"
+2025-10-14 10:09:08,300  INFO 13219 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 10:09:08,301  INFO 13219 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 10:09:08,310  INFO 13219 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2025-10-14 10:09:08,383  WARN 13219 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 10:09:08,434  INFO 13219 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 10:09:08,931  INFO 13219 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8080 (http)
+2025-10-14 10:09:08,939  INFO 13219 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 10:09:08,939  INFO 13219 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 10:09:09,028  INFO 13219 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 10:09:09,028  INFO 13219 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1243 ms
+2025-10-14 10:09:09,072  WARN 13219 simply-ai-server-web   [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh:591  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+2025-10-14 10:09:09,075  INFO 13219 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Stopping service [Tomcat]
+2025-10-14 10:09:09,096  INFO 13219 simply-ai-server-web   [main] o.s.b.a.l.ConditionEvaluationReportLoggingListener.logMessage:136  
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-10-14 10:09:09,108 ERROR 13219 simply-ai-server-web   [main] o.s.boot.SpringApplication.reportFailure:835  Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cacheManagerConfiguration': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317) ~[spring-boot-2.6.11.jar:2.6.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.6.11.jar:2.6.11]
+	at com.simply.ai.server.web.WebApplication.main(WebApplication.java:34) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-5.3.22.jar:5.3.22]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:191) ~[spring-context-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1332) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.22.jar:5.3.22]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.22.jar:5.3.22]
+	... 17 common frames omitted
+2025-10-14 10:16:03,961  INFO 13352 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarting:55  Starting WebApplication using Java 17.0.14 on 192.168.2.39 with PID 13352 (/Users/guojingwei/project/SimplyAiTools/web/target/classes started by guojingwei in /Users/guojingwei/project/SimplyAiTools)
+2025-10-14 10:16:03,963  INFO 13352 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStartupProfileInfo:651  The following 1 profile is active: "dev"
+2025-10-14 10:16:04,519  INFO 13352 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.multipleStoresDetected:262  Multiple Spring Data modules found, entering strict repository configuration mode
+2025-10-14 10:16:04,521  INFO 13352 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:132  Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-10-14 10:16:04,530  INFO 13352 simply-ai-server-web   [main] o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:201  Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2025-10-14 10:16:04,603  WARN 13352 simply-ai-server-web   [main] o.m.s.mapper.ClassPathMapperScanner.warn:44  No MyBatis mapper was found in '[com.simply.ai.server.web]' package. Please check your configuration.
+2025-10-14 10:16:04,652  INFO 13352 simply-ai-server-web   [main] o.s.cloud.context.scope.GenericScope.setSerializationId:283  BeanFactory id=5868e02a-569b-3fa3-8997-63ff12601f13
+2025-10-14 10:16:05,151  INFO 13352 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.initialize:108  Tomcat initialized with port(s): 8022 (http)
+2025-10-14 10:16:05,160  INFO 13352 simply-ai-server-web   [main] o.apache.catalina.core.StandardService.log:173  Starting service [Tomcat]
+2025-10-14 10:16:05,160  INFO 13352 simply-ai-server-web   [main] org.apache.catalina.core.StandardEngine.log:173  Starting Servlet engine: [Apache Tomcat/9.0.65]
+2025-10-14 10:16:05,248  INFO 13352 simply-ai-server-web   [main] o.a.c.c.C.[Tomcat].[localhost].[/].log:173  Initializing Spring embedded WebApplicationContext
+2025-10-14 10:16:05,248  INFO 13352 simply-ai-server-web   [main] o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:290  Root WebApplicationContext: initialization completed in 1242 ms
+2025-10-14 10:16:05,851  INFO 13352 simply-ai-server-web   [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure.dataSource:56  Init DruidDataSource
+2025-10-14 10:16:05,918  INFO 13352 simply-ai-server-web   [main] com.alibaba.druid.pool.DruidDataSource.init:995  {dataSource-1} inited
+2025-10-14 10:16:06,062  WARN 13352 simply-ai-server-web   [main] i.n.r.d.DnsServerAddressStreamProviders.<clinit>:70  Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS.
+2025-10-14 10:16:06,584  INFO 13352 simply-ai-server-web   [main] o.s.b.w.embedded.tomcat.TomcatWebServer.start:220  Tomcat started on port(s): 8022 (http) with context path ''
+2025-10-14 10:16:06,596  INFO 13352 simply-ai-server-web   [main] com.simply.ai.server.web.WebApplication.logStarted:61  Started WebApplication in 3.015 seconds (JVM running for 3.467)

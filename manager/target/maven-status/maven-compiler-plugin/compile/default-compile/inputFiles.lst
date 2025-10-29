@@ -1,0 +1,9 @@
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/feign/aop/FeignAspect.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/feign/client/DynamicClient.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/feign/client/DynamicFeignClientFactory.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/feign/client/OrderClient.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/feign/config/FeignConfig.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/feign/fallback/ErrorFallback.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/feign/service/DynamicService.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/manager/DemoManager.java
+/Users/guojingwei/project/SimplyAiTools/manager/src/main/java/com/simply/ai/server/manager/manager/impl/DemoManagerImpl.java

@@ -1,0 +1,13 @@
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/WebApplication.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/config/cache/CacheConfiguration.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/config/cache/CacheManagerConfiguration.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/config/cache/MyCacheConfig.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/config/cache/RedissonConfiguration.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/config/mq/ProducerClient.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/config/mq/RocketMQConfig.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/controller/ApiController.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/exception/GlobalExceptionHandlerAdvice.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/exception/SysException.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/health/HealthyController.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/service/DemoService.java
+/Users/guojingwei/project/SimplyAiTools/web/src/main/java/com/simply/ai/server/web/service/impl/DemoServiceImpl.java

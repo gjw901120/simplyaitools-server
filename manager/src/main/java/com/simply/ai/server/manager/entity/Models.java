@@ -1,0 +1,34 @@
+package com.simply.ai.server.manager.entity;
+
+import com.baomidou.mybatisplus.annotation.*;
+import com.simply.ai.server.manager.enums.ModelTypeEnum;
+import com.simply.ai.server.manager.enums.PricingTypeEnum;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
+@TableName("models")
+public class Models {
+
+    @TableId(type = IdType.AUTO)
+    private Integer id;
+
+    private Integer categoryId;
+
+    private String name;
+
+    private ModelTypeEnum type;
+
+    private Integer isPricingRules;
+
+    private PricingTypeEnum pricingType;
+
+    private Integer isDel;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime gmtCreate;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime gmtModified;
+}
