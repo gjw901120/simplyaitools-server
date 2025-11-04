@@ -1,9 +1,0 @@
-com/simply/ai/server/manager/manager/DemoManager.class
-com/simply/ai/server/manager/manager/impl/DemoManagerImpl.class
-com/simply/ai/server/manager/feign/service/DynamicService.class
-com/simply/ai/server/manager/feign/fallback/ErrorFallback.class
-com/simply/ai/server/manager/feign/client/DynamicFeignClientFactory.class
-com/simply/ai/server/manager/feign/config/FeignConfig.class
-com/simply/ai/server/manager/feign/client/OrderClient.class
-com/simply/ai/server/manager/feign/aop/FeignAspect.class
-com/simply/ai/server/manager/feign/client/DynamicClient.class

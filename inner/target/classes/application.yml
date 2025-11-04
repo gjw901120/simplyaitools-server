@@ -1,9 +1,0 @@
-spring:
-  profiles:
-    active: ${AI_PROJECT_ENV}
-  application:
-    name: simply-ai-server-inner
-
-app:
-  defaultTokenAuth: false
-  logDir: /logs/${spring.application.name}
