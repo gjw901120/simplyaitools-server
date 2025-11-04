@@ -1,28 +1,20 @@
 package com.simply.ai.server.manager.model.request;
 
 import com.simply.ai.server.manager.enums.SunoModelEnum;
+import com.simply.ai.server.manager.enums.SunoVocalGenderEnum;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
  * 延长音乐请求参数
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class SunoExtendRequest extends SunoBaseRequest implements Serializable {
+public class SunoExtendRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 音频ID
-     */
-    @NotBlank(message = "音频ID不能为空")
-    private String audioId;
 
     /**
      * 是否使用自定义参数
@@ -31,32 +23,119 @@ public class SunoExtendRequest extends SunoBaseRequest implements Serializable {
     private Boolean defaultParamFlag;
 
     /**
-     * 扩展提示词
+     * 要延长的音频ID
      */
+    @NotBlank(message = "音频ID不能为空")
+    private String audioId;
+
+    /**
+     * 延长内容的提示词
+     */
+    @Size(max = 3000, message = "提示词长度不能超过3000个字符")
     private String prompt;
 
     /**
-     * 音乐风格
+     * 延长音频的音乐风格
      */
+    @Size(max = 200, message = "风格描述长度不能超过200个字符")
     private String style;
 
     /**
-     * 音乐标题
+     * 延长音乐曲目的标题
      */
+    @Size(max = 80, message = "标题长度不能超过80个字符")
     private String title;
 
     /**
-     * 扩展起始时间点
+     * 开始扩展的时间点（秒）
      */
-    @Positive(message = "扩展起始时间必须大于0")
+    @Min(value = 1, message = "开始时间必须大于0")
     private Double continueAt;
 
     /**
-     * 业务参数校验
+     * 用于生成的AI模型版本
+     */
+    @NotNull(message = "模型版本不能为空")
+    private SunoModelEnum model;
+
+    /**
+     * 回调URL
+     */
+    @NotBlank(message = "回调URL不能为空")
+    @URL(message = "回调URL格式不正确")
+    private String callBackUrl;
+
+    /**
+     * 排除的音乐风格或特征
+     */
+    private String negativeTags;
+
+    /**
+     * 人声性别偏好
+     */
+    private SunoVocalGenderEnum vocalGender;
+
+    /**
+     * 风格遵循强度
+     */
+    @DecimalMin(value = "0.0", message = "风格权重不能小于0")
+    @DecimalMax(value = "1.0", message = "风格权重不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "风格权重最多保留两位小数")
+    private Double styleWeight;
+
+    /**
+     * 实验性偏离程度控制
+     */
+    @DecimalMin(value = "0.0", message = "创意偏离度不能小于0")
+    @DecimalMax(value = "1.0", message = "创意偏离度不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "创意偏离度最多保留两位小数")
+    private Double weirdnessConstraint;
+
+    /**
+     * 音频要素相对权重
+     */
+    @DecimalMin(value = "0.0", message = "音频权重不能小于0")
+    @DecimalMax(value = "1.0", message = "音频权重不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "音频权重最多保留两位小数")
+    private Double audioWeight;
+
+    /**
+     * 人格ID
+     */
+    private String personaId;
+
+    /**
+     * 构建延长请求
+     */
+    public static SunoExtendRequest build(String audioId, Boolean defaultParamFlag,
+                                          SunoModelEnum model, String callBackUrl) {
+        SunoExtendRequest request = new SunoExtendRequest();
+        request.setAudioId(audioId);
+        request.setDefaultParamFlag(defaultParamFlag);
+        request.setModel(model);
+        request.setCallBackUrl(callBackUrl);
+        return request;
+    }
+
+    /**
+     * 构建完整延长请求
+     */
+    public static SunoExtendRequest buildFull(String audioId, Boolean defaultParamFlag,
+                                              String prompt, String style, String title,
+                                              Double continueAt, SunoModelEnum model, String callBackUrl) {
+        SunoExtendRequest request = build(audioId, defaultParamFlag, model, callBackUrl);
+        request.setPrompt(prompt);
+        request.setStyle(style);
+        request.setTitle(title);
+        request.setContinueAt(continueAt);
+        return request;
+    }
+
+    /**
+     * 验证业务规则
      */
     public void validateBusinessRules() {
-        validateWeightParameters();
-
+        // 自定义参数模式下的验证
         if (Boolean.TRUE.equals(defaultParamFlag)) {
             if (prompt == null || prompt.trim().isEmpty()) {
                 throw new IllegalArgumentException("自定义参数模式下提示词不能为空");
@@ -68,53 +147,8 @@ public class SunoExtendRequest extends SunoBaseRequest implements Serializable {
                 throw new IllegalArgumentException("自定义参数模式下标题不能为空");
             }
             if (continueAt == null || continueAt <= 0) {
-                throw new IllegalArgumentException("自定义参数模式下扩展起始时间必须大于0");
-            }
-
-            // 模型特定的长度校验 - 使用修正后的方法
-            int promptMaxLength = getPromptMaxLength();
-            if (prompt.length() > promptMaxLength) {
-                throw new IllegalArgumentException("提示词长度不能超过" + promptMaxLength + "个字符");
-            }
-
-            int styleMaxLength = getStyleMaxLength();
-            if (style.length() > styleMaxLength) {
-                throw new IllegalArgumentException("风格描述长度不能超过" + styleMaxLength + "个字符");
-            }
-
-            int titleMaxLength = getTitleMaxLength();
-            if (title.length() > titleMaxLength) {
-                throw new IllegalArgumentException("标题长度不能超过" + titleMaxLength + "个字符");
+                throw new IllegalArgumentException("自定义参数模式下开始时间必须大于0");
             }
         }
-    }
-
-    /**
-     * 构建自定义参数延长请求
-     */
-    public static SunoExtendRequest customParams(String audioId, String prompt, String style, String title,
-                                                 Double continueAt, SunoModelEnum model, String callBackUrl) {
-        SunoExtendRequest request = new SunoExtendRequest();
-        request.setAudioId(audioId);
-        request.setDefaultParamFlag(true);
-        request.setPrompt(prompt);
-        request.setStyle(style);
-        request.setTitle(title);
-        request.setContinueAt(continueAt);
-        request.setModel(model);
-        request.setCallBackUrl(callBackUrl);
-        return request;
-    }
-
-    /**
-     * 构建继承参数延长请求
-     */
-    public static SunoExtendRequest inheritParams(String audioId, SunoModelEnum model, String callBackUrl) {
-        SunoExtendRequest request = new SunoExtendRequest();
-        request.setAudioId(audioId);
-        request.setDefaultParamFlag(false);
-        request.setModel(model);
-        request.setCallBackUrl(callBackUrl);
-        return request;
     }
 }

@@ -1,33 +1,30 @@
 package com.simply.ai.server.manager.model.request;
 
 import com.simply.ai.server.manager.enums.SunoModelEnum;
+import com.simply.ai.server.manager.enums.SunoVocalGenderEnum;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
  * 上传并扩展音乐请求参数
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class SunoUploadExtendRequest extends SunoBaseRequest implements Serializable {
+public class SunoUploadExtendRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 上传音频URL
+     * 上传音频文件的URL
      */
     @NotBlank(message = "上传URL不能为空")
     @URL(message = "上传URL格式不正确")
     private String uploadUrl;
 
     /**
-     * 是否使用自定义参数
+     * 是否启用自定义参数模式
      */
     @NotNull(message = "参数标志不能为空")
     private Boolean defaultParamFlag;
@@ -38,32 +35,114 @@ public class SunoUploadExtendRequest extends SunoBaseRequest implements Serializ
     private Boolean instrumental;
 
     /**
-     * 扩展提示词
+     * 描述音乐应如何延长
      */
+    @Size(max = 5000, message = "提示词长度不能超过5000个字符")
     private String prompt;
 
     /**
      * 音乐风格
      */
+    @Size(max = 1000, message = "风格描述长度不能超过1000个字符")
     private String style;
 
     /**
      * 音乐标题
      */
+    @Size(max = 100, message = "标题长度不能超过100个字符")
     private String title;
 
     /**
-     * 扩展起始时间点
+     * 开始扩展的时间点（秒）
      */
-    @Positive(message = "扩展起始时间必须大于0")
+    @Min(value = 1, message = "开始时间必须大于0")
     private Double continueAt;
 
     /**
-     * 业务参数校验
+     * 用于生成的AI模型版本
+     */
+    @NotNull(message = "模型版本不能为空")
+    private SunoModelEnum model;
+
+    /**
+     * 排除的音乐风格
+     */
+    private String negativeTags;
+
+    /**
+     * 回调URL
+     */
+    @NotBlank(message = "回调URL不能为空")
+    @URL(message = "回调URL格式不正确")
+    private String callBackUrl;
+
+    /**
+     * 人声性别偏好
+     */
+    private SunoVocalGenderEnum vocalGender;
+
+    /**
+     * 风格遵循强度
+     */
+    @DecimalMin(value = "0.0", message = "风格权重不能小于0")
+    @DecimalMax(value = "1.0", message = "风格权重不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "风格权重最多保留两位小数")
+    private Double styleWeight;
+
+    /**
+     * 实验性偏离程度控制
+     */
+    @DecimalMin(value = "0.0", message = "创意偏离度不能小于0")
+    @DecimalMax(value = "1.0", message = "创意偏离度不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "创意偏离度最多保留两位小数")
+    private Double weirdnessConstraint;
+
+    /**
+     * 音频要素相对权重
+     */
+    @DecimalMin(value = "0.0", message = "音频权重不能小于0")
+    @DecimalMax(value = "1.0", message = "音频权重不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "音频权重最多保留两位小数")
+    private Double audioWeight;
+
+    /**
+     * 人格ID
+     */
+    private String personaId;
+
+    /**
+     * 构建上传扩展请求
+     */
+    public static SunoUploadExtendRequest build(String uploadUrl, Boolean defaultParamFlag,
+                                                SunoModelEnum model, String callBackUrl) {
+        SunoUploadExtendRequest request = new SunoUploadExtendRequest();
+        request.setUploadUrl(uploadUrl);
+        request.setDefaultParamFlag(defaultParamFlag);
+        request.setModel(model);
+        request.setCallBackUrl(callBackUrl);
+        return request;
+    }
+
+    /**
+     * 构建完整上传扩展请求
+     */
+    public static SunoUploadExtendRequest buildFull(String uploadUrl, Boolean defaultParamFlag,
+                                                    String prompt, String style, String title,
+                                                    Double continueAt, SunoModelEnum model,
+                                                    String callBackUrl) {
+        SunoUploadExtendRequest request = build(uploadUrl, defaultParamFlag, model, callBackUrl);
+        request.setPrompt(prompt);
+        request.setStyle(style);
+        request.setTitle(title);
+        request.setContinueAt(continueAt);
+        return request;
+    }
+
+    /**
+     * 验证业务规则
      */
     public void validateBusinessRules() {
-        validateWeightParameters();
-
+        // 自定义参数模式下的验证
         if (Boolean.TRUE.equals(defaultParamFlag)) {
             if (prompt == null || prompt.trim().isEmpty()) {
                 throw new IllegalArgumentException("自定义参数模式下提示词不能为空");
@@ -75,59 +154,8 @@ public class SunoUploadExtendRequest extends SunoBaseRequest implements Serializ
                 throw new IllegalArgumentException("自定义参数模式下标题不能为空");
             }
             if (continueAt == null || continueAt <= 0) {
-                throw new IllegalArgumentException("自定义参数模式下扩展起始时间必须大于0");
-            }
-
-            // 模型特定的长度校验 - 使用修正后的方法
-            int promptMaxLength = getPromptMaxLength();
-            if (prompt.length() > promptMaxLength) {
-                throw new IllegalArgumentException("提示词长度不能超过" + promptMaxLength + "个字符");
-            }
-
-            int styleMaxLength = getStyleMaxLength();
-            if (style.length() > styleMaxLength) {
-                throw new IllegalArgumentException("风格描述长度不能超过" + styleMaxLength + "个字符");
-            }
-
-            int titleMaxLength = getTitleMaxLength();
-            if (title.length() > titleMaxLength) {
-                throw new IllegalArgumentException("标题长度不能超过" + titleMaxLength + "个字符");
-            }
-
-            // 自定义参数模式下的纯音乐校验
-            if (Boolean.FALSE.equals(instrumental) && (prompt == null || prompt.trim().isEmpty())) {
-                throw new IllegalArgumentException("自定义非纯音乐模式下提示词不能为空");
+                throw new IllegalArgumentException("自定义参数模式下开始时间必须大于0");
             }
         }
-    }
-
-    /**
-     * 构建自定义参数扩展请求
-     */
-    public static SunoUploadExtendRequest customParams(String uploadUrl, String prompt, String style, String title,
-                                                       Double continueAt, Boolean instrumental, SunoModelEnum model, String callBackUrl) {
-        SunoUploadExtendRequest request = new SunoUploadExtendRequest();
-        request.setUploadUrl(uploadUrl);
-        request.setDefaultParamFlag(true);
-        request.setPrompt(prompt);
-        request.setStyle(style);
-        request.setTitle(title);
-        request.setContinueAt(continueAt);
-        request.setInstrumental(instrumental);
-        request.setModel(model);
-        request.setCallBackUrl(callBackUrl);
-        return request;
-    }
-
-    /**
-     * 构建非自定义参数扩展请求
-     */
-    public static SunoUploadExtendRequest simpleParams(String uploadUrl, SunoModelEnum model, String callBackUrl) {
-        SunoUploadExtendRequest request = new SunoUploadExtendRequest();
-        request.setUploadUrl(uploadUrl);
-        request.setDefaultParamFlag(false);
-        request.setModel(model);
-        request.setCallBackUrl(callBackUrl);
-        return request;
     }
 }

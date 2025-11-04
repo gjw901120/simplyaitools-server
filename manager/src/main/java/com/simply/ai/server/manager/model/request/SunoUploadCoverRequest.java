@@ -1,30 +1,45 @@
 package com.simply.ai.server.manager.model.request;
 
-import com.simply.ai.server.manager.constant.SunoMusicConstant;
 import com.simply.ai.server.manager.enums.SunoModelEnum;
+import com.simply.ai.server.manager.enums.SunoVocalGenderEnum;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
- * 上传并翻唱请求参数
+ * 上传并翻唱音乐请求参数
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class SunoUploadCoverRequest extends SunoBaseRequest implements Serializable {
+public class SunoUploadCoverRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 上传音频URL
+     * 上传音频文件的URL
      */
     @NotBlank(message = "上传URL不能为空")
     @URL(message = "上传URL格式不正确")
     private String uploadUrl;
+
+    /**
+     * 描述期望生成的音频内容
+     */
+    @Size(max = 5000, message = "提示词长度不能超过5000个字符")
+    private String prompt;
+
+    /**
+     * 音乐风格或流派
+     */
+    @Size(max = 1000, message = "风格描述长度不能超过1000个字符")
+    private String style;
+
+    /**
+     * 生成音乐的标题
+     */
+    @Size(max = 100, message = "标题长度不能超过100个字符")
+    private String title;
 
     /**
      * 是否启用自定义模式
@@ -39,27 +54,91 @@ public class SunoUploadCoverRequest extends SunoBaseRequest implements Serializa
     private Boolean instrumental;
 
     /**
-     * 提示词
+     * 用于生成的AI模型版本
      */
-    private String prompt;
+    @NotNull(message = "模型版本不能为空")
+    private SunoModelEnum model;
 
     /**
-     * 音乐风格
+     * 排除的音乐风格或特征
      */
-    private String style;
+    private String negativeTags;
 
     /**
-     * 音乐标题
+     * 回调URL
      */
-    private String title;
+    @NotBlank(message = "回调URL不能为空")
+    @URL(message = "回调URL格式不正确")
+    private String callBackUrl;
 
     /**
-     * 业务参数校验
+     * 人声性别偏好
+     */
+    private SunoVocalGenderEnum vocalGender;
+
+    /**
+     * 风格遵循强度
+     */
+    @DecimalMin(value = "0.0", message = "风格权重不能小于0")
+    @DecimalMax(value = "1.0", message = "风格权重不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "风格权重最多保留两位小数")
+    private Double styleWeight;
+
+    /**
+     * 实验性偏离程度控制
+     */
+    @DecimalMin(value = "0.0", message = "创意偏离度不能小于0")
+    @DecimalMax(value = "1.0", message = "创意偏离度不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "创意偏离度最多保留两位小数")
+    private Double weirdnessConstraint;
+
+    /**
+     * 音频要素相对权重
+     */
+    @DecimalMin(value = "0.0", message = "音频权重不能小于0")
+    @DecimalMax(value = "1.0", message = "音频权重不能大于1")
+    @Digits(integer = 1, fraction = 2, message = "音频权重最多保留两位小数")
+    private Double audioWeight;
+
+    /**
+     * 人格ID
+     */
+    private String personaId;
+
+    /**
+     * 构建上传翻唱请求
+     */
+    public static SunoUploadCoverRequest build(String uploadUrl, Boolean customMode,
+                                               Boolean instrumental, SunoModelEnum model,
+                                               String callBackUrl) {
+        SunoUploadCoverRequest request = new SunoUploadCoverRequest();
+        request.setUploadUrl(uploadUrl);
+        request.setCustomMode(customMode);
+        request.setInstrumental(instrumental);
+        request.setModel(model);
+        request.setCallBackUrl(callBackUrl);
+        return request;
+    }
+
+    /**
+     * 构建完整上传翻唱请求
+     */
+    public static SunoUploadCoverRequest buildFull(String uploadUrl, String prompt, String style,
+                                                   String title, Boolean customMode,
+                                                   Boolean instrumental, SunoModelEnum model,
+                                                   String callBackUrl) {
+        SunoUploadCoverRequest request = build(uploadUrl, customMode, instrumental, model, callBackUrl);
+        request.setPrompt(prompt);
+        request.setStyle(style);
+        request.setTitle(title);
+        return request;
+    }
+
+    /**
+     * 验证业务规则
      */
     public void validateBusinessRules() {
-        validateWeightParameters();
-
-        // 自定义模式下的校验
+        // 自定义模式下的验证
         if (Boolean.TRUE.equals(customMode)) {
             if (style == null || style.trim().isEmpty()) {
                 throw new IllegalArgumentException("自定义模式下风格不能为空");
@@ -68,65 +147,13 @@ public class SunoUploadCoverRequest extends SunoBaseRequest implements Serializa
                 throw new IllegalArgumentException("自定义模式下标题不能为空");
             }
             if (Boolean.FALSE.equals(instrumental) && (prompt == null || prompt.trim().isEmpty())) {
-                throw new IllegalArgumentException("自定义非纯音乐模式下提示词不能为空");
-            }
-
-            // 模型特定的长度校验 - 使用修正后的方法
-            int styleMaxLength = getStyleMaxLength();
-            if (style.length() > styleMaxLength) {
-                throw new IllegalArgumentException("风格描述长度不能超过" + styleMaxLength + "个字符");
-            }
-
-            int titleMaxLength = getTitleMaxLength();
-            if (title.length() > titleMaxLength) {
-                throw new IllegalArgumentException("标题长度不能超过" + titleMaxLength + "个字符");
-            }
-
-            if (Boolean.FALSE.equals(instrumental)) {
-                int promptMaxLength = getPromptMaxLength();
-                if (prompt.length() > promptMaxLength) {
-                    throw new IllegalArgumentException("提示词长度不能超过" + promptMaxLength + "个字符");
-                }
+                throw new IllegalArgumentException("非纯音乐模式下提示词不能为空");
             }
         } else {
-            // 非自定义模式下的校验
+            // 非自定义模式下只需要prompt
             if (prompt == null || prompt.trim().isEmpty()) {
                 throw new IllegalArgumentException("非自定义模式下提示词不能为空");
             }
-            if (prompt.length() > SunoMusicConstant.PROMPT_MAX_LENGTH_NON_CUSTOM) {
-                throw new IllegalArgumentException("非自定义模式下提示词长度不能超过500个字符");
-            }
         }
-    }
-
-    /**
-     * 构建自定义模式翻唱请求
-     */
-    public static SunoUploadCoverRequest customMode(String uploadUrl, String style, String title,
-                                                    Boolean instrumental, String prompt, SunoModelEnum model, String callBackUrl) {
-        SunoUploadCoverRequest request = new SunoUploadCoverRequest();
-        request.setUploadUrl(uploadUrl);
-        request.setCustomMode(true);
-        request.setStyle(style);
-        request.setTitle(title);
-        request.setInstrumental(instrumental);
-        request.setPrompt(prompt);
-        request.setModel(model);
-        request.setCallBackUrl(callBackUrl);
-        return request;
-    }
-
-    /**
-     * 构建非自定义模式翻唱请求
-     */
-    public static SunoUploadCoverRequest simpleMode(String uploadUrl, String prompt, SunoModelEnum model, String callBackUrl) {
-        SunoUploadCoverRequest request = new SunoUploadCoverRequest();
-        request.setUploadUrl(uploadUrl);
-        request.setCustomMode(false);
-        request.setPrompt(prompt);
-        request.setModel(model);
-        request.setCallBackUrl(callBackUrl);
-        request.setInstrumental(true); // 非自定义模式默认为纯音乐
-        return request;
     }
 }
