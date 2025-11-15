@@ -4,6 +4,8 @@ import com.simply.ai.server.manager.enums.ResponseCodeEnum;
 import com.simply.ai.server.manager.manager.VideoManager;
 import com.simply.ai.server.manager.model.response.VideoGenerateResponse;
 import com.simply.ai.server.manager.model.request.VeoGenerateRequest;
+import com.simply.ai.server.manager.model.request.VeoExtendRequest;
+import com.simply.ai.server.web.model.dto.request.VeoExtendDTO;
 import com.simply.ai.server.web.model.dto.request.VeoGenerateDTO;
 import com.simply.ai.server.web.service.VeoGenerateService;
 import com.simply.common.core.exception.BaseException;
@@ -30,6 +32,21 @@ public class VeoGenerateServiceImpl implements VeoGenerateService {
         BeanUtils.copyProperties(veoGenerateDTO, request);
 
         VideoGenerateResponse response = videoManager.generateVideo(request);
+
+        if(!ResponseCodeEnum.SUCCESS.equals(response.getCode())) {
+            throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
+        }
+
+    }
+
+    @Override
+    public void extendVideo(VeoExtendDTO veoExtendDTO) {
+
+        VeoExtendRequest request =  new VeoExtendRequest();
+
+        BeanUtils.copyProperties(veoExtendDTO, request);
+
+        VideoGenerateResponse response = videoManager.extendVideo(request);
 
         if(!ResponseCodeEnum.SUCCESS.equals(response.getCode())) {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());

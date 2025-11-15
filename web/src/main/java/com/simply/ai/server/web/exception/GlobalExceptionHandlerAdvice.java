@@ -1,4 +1,4 @@
-package com.simply.wallpaper.server.web.exception;
+package com.simply.ai.server.web.exception;
 
 import com.simply.common.core.exception.DefaultGlobalExceptionHandlerAdvice;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

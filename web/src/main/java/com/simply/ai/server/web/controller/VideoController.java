@@ -1,9 +1,7 @@
 package com.simply.ai.server.web.controller;
 
-import com.simply.ai.server.web.config.exception.ResponseErrorType;
 import com.simply.ai.server.web.model.dto.request.VeoGenerateDTO;
 import com.simply.ai.server.web.service.VeoGenerateService;
-import com.simply.common.core.exception.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +24,6 @@ public class VideoController {
         request.validateModelAndGenerationTypeWithException();
 
         request.validateAspectRatioWithException();
-
 
         veoGenerateService.generateVideo(request);
         return ResponseResult.success();

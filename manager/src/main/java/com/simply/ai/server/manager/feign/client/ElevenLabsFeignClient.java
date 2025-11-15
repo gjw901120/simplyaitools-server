@@ -1,4 +1,3 @@
-// ElevenLabsFeignClient.java
 package com.simply.ai.server.manager.feign.client;
 
 import com.simply.ai.server.manager.feign.config.FeignConfig;
@@ -21,12 +20,6 @@ import javax.validation.Valid;
         fallback = ErrorFallback.class
 )
 public interface ElevenLabsFeignClient {
-
-    /**
-     * 创建任务（通用接口）
-     */
-    @PostMapping("/api/v1/jobs/createTask")
-    ElevenLabsResponse createTask(@Valid @RequestBody Object request);
 
     /**
      * 文本转语音
