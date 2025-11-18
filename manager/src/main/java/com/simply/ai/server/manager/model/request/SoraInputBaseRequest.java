@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simply.ai.server.manager.enums.SoraAspectRatioEnum;
 import com.simply.ai.server.manager.enums.SoraFramesEnum;
 import lombok.Data;
@@ -14,9 +15,12 @@ public class SoraInputBaseRequest {
     @Size(max = 5000, message = "提示词长度不能超过5000个字符")
     private String prompt;
 
+    @JsonProperty("aspect_ratio")
     private SoraAspectRatioEnum aspectRatio;
 
+    @JsonProperty("n_frames")
     private SoraFramesEnum nFrames;
 
+    @JsonProperty("remove_watermark")
     private Boolean removeWatermark;
 }

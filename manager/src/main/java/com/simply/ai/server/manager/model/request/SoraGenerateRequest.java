@@ -5,11 +5,13 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Data
 public class SoraGenerateRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @NotNull(message = "模型类型不能为空")

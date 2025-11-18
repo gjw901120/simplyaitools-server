@@ -15,27 +15,32 @@ public class VideoManagerImpl implements VideoManager {
     private VideoFeignClient videoFeignClient;
 
     @Override
-    public VideoGenerateResponse generateVideo(VeoGenerateRequest request) {
-        return videoFeignClient.generateVideo(request);
+    public VideoGenerateResponse veoGenerate(VeoGenerateRequest request) {
+        return videoFeignClient.veoGenerate(request);
     }
 
     @Override
-    public VideoGenerateResponse generateVideo(RunwayGenerateRequest request) {
-        return videoFeignClient.generateVideo(request);
+    public VideoGenerateResponse runwayGenerate(RunwayGenerateRequest request) {
+        return videoFeignClient.runwayGenerate(request);
     }
 
     @Override
-    public VideoGenerateResponse transformVideo(RunwayAlephGenerateRequest request) {
-        return videoFeignClient.transformVideo(request);
+    public VideoGenerateResponse runwayExtend(RunwayExtendRequest request) {
+        return videoFeignClient.runwayExtend(request);
     }
 
     @Override
-    public VideoGenerateResponse modifyVideo(LumaGenerateRequest request) {
-        return videoFeignClient.modifyVideo(request);
+    public VideoGenerateResponse runwayAlephGenerate(RunwayAlephGenerateRequest request) {
+        return videoFeignClient.alephGenerate(request);
     }
 
     @Override
-    public VideoGenerateResponse extendVideo(VeoExtendRequest request) {
-        return videoFeignClient.extendVideo(request);
+    public VideoGenerateResponse lumaModify(LumaGenerateRequest request) {
+        return videoFeignClient.lumaModify(request);
+    }
+
+    @Override
+    public VideoGenerateResponse veoExtend(VeoExtendRequest request) {
+        return videoFeignClient.veoExtend(request);
     }
 }

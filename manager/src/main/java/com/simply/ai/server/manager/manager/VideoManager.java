@@ -5,12 +5,14 @@ import com.simply.ai.server.manager.model.response.VideoGenerateResponse;
 
 public interface VideoManager {
 
-    VideoGenerateResponse generateVideo(VeoGenerateRequest request);
-    VideoGenerateResponse generateVideo(RunwayGenerateRequest request);
+    VideoGenerateResponse veoGenerate(VeoGenerateRequest request);
+    VideoGenerateResponse runwayGenerate(RunwayGenerateRequest request);
 
-    VideoGenerateResponse transformVideo(RunwayAlephGenerateRequest request);
+    VideoGenerateResponse runwayExtend(RunwayExtendRequest request);
 
-    VideoGenerateResponse modifyVideo(LumaGenerateRequest request);
+    VideoGenerateResponse runwayAlephGenerate(RunwayAlephGenerateRequest request);
 
-    VideoGenerateResponse extendVideo(VeoExtendRequest request);
+    VideoGenerateResponse lumaModify(LumaGenerateRequest request);
+
+    VideoGenerateResponse veoExtend(VeoExtendRequest request);
 }

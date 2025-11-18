@@ -22,29 +22,35 @@ public interface VideoFeignClient {
      * 生成veo视频
      */
     @PostMapping("/api/v1/veo/generate")
-    VideoGenerateResponse generateVideo(@Valid @RequestBody VeoGenerateRequest request);
+    VideoGenerateResponse veoGenerate(@Valid @RequestBody VeoGenerateRequest request);
 
     /**
      * 生成runway视频
      */
     @PostMapping("/api/v1/runway/generate")
-    VideoGenerateResponse generateVideo(@Valid @RequestBody RunwayGenerateRequest request);
+    VideoGenerateResponse runwayGenerate(@Valid @RequestBody RunwayGenerateRequest request);
+
+    /**
+     * 生成runwayextend视频
+     */
+    @PostMapping("/api/v1/runway/extend")
+    VideoGenerateResponse runwayExtend(@Valid @RequestBody RunwayExtendRequest request);
 
     /**
      * 视频runwayaleph生成
      */
     @PostMapping("/api/v1/aleph/generate")
-    VideoGenerateResponse transformVideo(@Valid @RequestBody RunwayAlephGenerateRequest request);
+    VideoGenerateResponse alephGenerate(@Valid @RequestBody RunwayAlephGenerateRequest request);
 
     /**
      * 视频Luma修改
      */
     @PostMapping("/api/v1/luma/modify")
-    VideoGenerateResponse modifyVideo(@Valid @RequestBody LumaGenerateRequest request);
+    VideoGenerateResponse lumaModify(@Valid @RequestBody LumaGenerateRequest request);
 
     /**
      * 扩展veo视频
      */
     @PostMapping("/api/v1/veo/extend")
-    VideoGenerateResponse extendVideo(@Valid @RequestBody VeoExtendRequest request);
+    VideoGenerateResponse veoExtend(@Valid @RequestBody VeoExtendRequest request);
 }

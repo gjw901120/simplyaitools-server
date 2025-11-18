@@ -1,4 +1,3 @@
-// RunwayGenerateRequest.java
 package com.simply.ai.server.manager.model.request;
 
 import com.simply.ai.server.manager.constant.RunwayVideoConstant;
@@ -8,6 +7,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -16,6 +16,7 @@ import java.io.Serializable;
 @Data
 public class RunwayGenerateRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

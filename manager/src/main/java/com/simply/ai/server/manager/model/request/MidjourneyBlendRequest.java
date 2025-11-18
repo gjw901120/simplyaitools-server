@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class MidjourneyBlendRequest extends MidjourneyBaseRequest {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

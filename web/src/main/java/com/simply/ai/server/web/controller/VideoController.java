@@ -1,6 +1,9 @@
 package com.simply.ai.server.web.controller;
 
-import com.simply.ai.server.web.model.dto.request.VeoGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.service.LumaGenerateService;
+import com.simply.ai.server.web.service.RunwayGenerateService;
+import com.simply.ai.server.web.service.SoraGenerateService;
 import com.simply.ai.server.web.service.VeoGenerateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,13 @@ public class VideoController {
     @Autowired
     private VeoGenerateService veoGenerateService;
 
+    @Autowired
+    private RunwayGenerateService runwayGenerateService;
+
+
+    @Autowired
+    private LumaGenerateService lumaGenerateService;
+
     @PostMapping("/veo/generate")
     public ResponseResult<?> generateVideo(@Valid @RequestBody VeoGenerateDTO request) {
         request.validateImageAndGenerationTypeWithException();
@@ -28,4 +38,48 @@ public class VideoController {
         veoGenerateService.generateVideo(request);
         return ResponseResult.success();
     }
+
+    @PostMapping("/veo/extend")
+    public ResponseResult<?> extendVideo(@Valid @RequestBody VeoExtendDTO request) {
+
+        veoGenerateService.extendVideo(request);
+
+        return ResponseResult.success();
+    }
+
+    @PostMapping("/runway/generate")
+    public ResponseResult<?> runwayGenerate(@Valid @RequestBody RunwayGenerateDTO request) {
+
+        runwayGenerateService.runwayGenerate(request);
+
+        return ResponseResult.success();
+    }
+
+    @PostMapping("/runway/extend")
+    public ResponseResult<?> runwayExtend(@Valid @RequestBody RunwayExtendDTO request) {
+
+        runwayGenerateService.runwayExtend(request);
+
+        return ResponseResult.success();
+    }
+
+    @PostMapping("/runway/aleph")
+    public ResponseResult<?> runwayAleph(@Valid @RequestBody RunwayAlephDTO request) {
+
+        runwayGenerateService.runwayAleph(request);
+
+        return ResponseResult.success();
+    }
+
+    @PostMapping("/luma/generate")
+    public ResponseResult<?> lumaGenerate(@Valid @RequestBody LumaGenerateDTO request) {
+
+        lumaGenerateService.lumaGenerate(request);
+
+        return ResponseResult.success();
+    }
+
+
+
+
 }

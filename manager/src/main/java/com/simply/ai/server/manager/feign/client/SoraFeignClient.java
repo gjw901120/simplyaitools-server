@@ -25,29 +25,29 @@ public interface SoraFeignClient {
     @PostMapping("/api/v1/jobs/createTask")
     VideoGenerateResponse generateVideo(@Valid @RequestBody SoraGenerateRequest request);
 
-//    /**
-//     * Sora 2 文生视频
-//     */
-//    @PostMapping("/api/v1/jobs/createTask")
-//    VideoGenerateResponse soraTextToVideo(@Valid @RequestBody SoraGenerateRequest request);
-//
-//    /**
-//     * Sora 2 图生视频
-//     */
-//    @PostMapping("/api/v1/jobs/createTask")
-//    VideoGenerateResponse soraImageToVideo(@Valid @RequestBody SoraGenerateRequest request);
-//
-//    /**
-//     * Sora 2 Pro 文生视频
-//     */
-//    @PostMapping("/api/v1/jobs/createTask")
-//    VideoGenerateResponse soraProTextToVideo(@Valid @RequestBody SoraGenerateRequest request);
-//
-//    /**
-//     * Sora 2 Pro 图生视频
-//     */
-//    @PostMapping("/api/v1/jobs/createTask")
-//    VideoGenerateResponse soraProImageToVideo(@Valid @RequestBody SoraGenerateRequest request);
+    /**
+     * Sora 2 文生视频
+     */
+    @PostMapping("/api/v1/jobs/createTask")
+    VideoGenerateResponse soraTextToVideo(@Valid @RequestBody SoraGenerateRequest request);
+
+    /**
+     * Sora 2 图生视频
+     */
+    @PostMapping("/api/v1/jobs/createTask")
+    VideoGenerateResponse soraImageToVideo(@Valid @RequestBody SoraGenerateRequest request);
+
+    /**
+     * Sora 2 Pro 文生视频
+     */
+    @PostMapping("/api/v1/jobs/createTask")
+    VideoGenerateResponse soraProTextToVideo(@Valid @RequestBody SoraGenerateRequest request);
+
+    /**
+     * Sora 2 Pro 图生视频
+     */
+    @PostMapping("/api/v1/jobs/createTask")
+    VideoGenerateResponse soraProImageToVideo(@Valid @RequestBody SoraGenerateRequest request);
 
     /**
      * Sora 水印移除

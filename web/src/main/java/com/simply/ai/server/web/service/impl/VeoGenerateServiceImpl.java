@@ -31,7 +31,7 @@ public class VeoGenerateServiceImpl implements VeoGenerateService {
 
         BeanUtils.copyProperties(veoGenerateDTO, request);
 
-        VideoGenerateResponse response = videoManager.generateVideo(request);
+        VideoGenerateResponse response = videoManager.veoGenerate(request);
 
         if(!ResponseCodeEnum.SUCCESS.equals(response.getCode())) {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
@@ -46,7 +46,7 @@ public class VeoGenerateServiceImpl implements VeoGenerateService {
 
         BeanUtils.copyProperties(veoExtendDTO, request);
 
-        VideoGenerateResponse response = videoManager.extendVideo(request);
+        VideoGenerateResponse response = videoManager.veoExtend(request);
 
         if(!ResponseCodeEnum.SUCCESS.equals(response.getCode())) {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());

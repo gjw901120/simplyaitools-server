@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Data
 public class RunwayAlephGenerateRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -81,12 +83,6 @@ public class RunwayAlephGenerateRequest implements Serializable {
             throw new IllegalArgumentException("参考图像URL必须通过HTTPS访问");
         }
 
-        // 验证水印字符（字母数字和基本符号）
-        if (waterMark != null && !waterMark.isEmpty()) {
-            if (!waterMark.matches("^[a-zA-Z0-9\\s\\-\\.\\_\\@]+$")) {
-                throw new IllegalArgumentException("水印文本只能包含字母数字字符和基本符号");
-            }
-        }
     }
 
     /**

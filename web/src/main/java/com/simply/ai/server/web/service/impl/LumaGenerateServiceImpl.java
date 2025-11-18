@@ -1,0 +1,36 @@
+package com.simply.ai.server.web.service.impl;
+
+import com.simply.ai.server.manager.enums.ResponseCodeEnum;
+import com.simply.ai.server.manager.manager.VideoManager;
+import com.simply.ai.server.manager.model.request.LumaGenerateRequest;
+import com.simply.ai.server.manager.model.response.VideoGenerateResponse;
+import com.simply.ai.server.web.model.dto.request.LumaGenerateDTO;
+import com.simply.ai.server.web.service.LumaGenerateService;
+import com.simply.common.core.exception.BaseException;
+import com.simply.common.core.exception.error.ThirdpartyErrorType;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LumaGenerateServiceImpl implements LumaGenerateService {
+
+    @Autowired
+    private VideoManager videoManager;
+
+    @Override
+    public void lumaGenerate(LumaGenerateDTO lumaGenerateDTO) {
+
+        // 实现视频生成逻辑
+        LumaGenerateRequest request = new LumaGenerateRequest();
+
+        BeanUtils.copyProperties(lumaGenerateDTO, request);
+
+        VideoGenerateResponse response = videoManager.lumaModify(request);
+
+        if(!ResponseCodeEnum.SUCCESS.equals(response.getCode())) {
+            throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
+        }
+
+    }
+}

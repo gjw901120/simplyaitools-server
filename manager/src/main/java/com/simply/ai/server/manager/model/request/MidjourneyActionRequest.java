@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serial;
 
 /**
  * Action 动作请求参数
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = true)
 public class MidjourneyActionRequest extends MidjourneyBaseRequest {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
