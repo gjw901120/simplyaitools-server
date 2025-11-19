@@ -7,6 +7,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Data
 public class SunoGenerateRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -94,11 +96,6 @@ public class SunoGenerateRequest implements Serializable {
     @DecimalMax(value = "1.0", message = "音频权重不能大于1")
     @Digits(integer = 1, fraction = 2, message = "音频权重最多保留两位小数")
     private Double audioWeight;
-
-    /**
-     * 人格ID
-     */
-    private String personaId;
 
     /**
      * 构建基础生成请求

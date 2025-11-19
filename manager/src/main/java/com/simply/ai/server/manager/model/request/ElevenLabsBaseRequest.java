@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Data
 public class ElevenLabsBaseRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

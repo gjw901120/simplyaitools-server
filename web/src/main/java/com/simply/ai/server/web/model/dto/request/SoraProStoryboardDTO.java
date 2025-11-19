@@ -27,62 +27,48 @@ public class SoraProStoryboardDTO {
     private String callBackUrl;
 
     /**
-     * Input parameters object
+     * Total length of the video
      */
-    @Valid
-    @NotNull(message = "Input cannot be null")
-    private SoraProStoryboardInput input;
+    @NotBlank(message = "Number of frames cannot be empty")
+    @Pattern(regexp = "10|15|25", message = "Number of frames must be 10, 15 or 25")
+    private String nFrames;
 
     /**
-     * Inner input class
+     * Image files to use as input
+     */
+    private List<MultipartFile> imageFiles;
+
+    /**
+     * Aspect ratio of the image
+     */
+    @Pattern(regexp = "portrait|landscape", message = "Aspect ratio must be portrait or landscape")
+    private String aspectRatio;
+
+    /**
+     * Array of scene objects defining the storyboard sequence
+     */
+    @NotNull(message = "Shots cannot be null")
+    @Size(min = 1, message = "At least one shot is required")
+    private List<Shot> shots;
+
+    /**
+     * Shot object with duration and scene description
      */
     @Data
-    public static class SoraProStoryboardInput {
+    public static class Shot {
 
         /**
-         * Total length of the video
+         * Duration in seconds
          */
-        @NotBlank(message = "Number of frames cannot be empty")
-        @Pattern(regexp = "10|15|25", message = "Number of frames must be 10, 15 or 25")
-        private String nFrames;
+        @NotNull(message = "Duration cannot be null")
+        @Positive(message = "Duration must be positive")
+        private Double duration;
 
         /**
-         * Image files to use as input
+         * Scene description/prompt
          */
-        private List<MultipartFile> imageFiles;
-
-        /**
-         * Aspect ratio of the image
-         */
-        @Pattern(regexp = "portrait|landscape", message = "Aspect ratio must be portrait or landscape")
-        private String aspectRatio;
-
-        /**
-         * Array of scene objects defining the storyboard sequence
-         */
-        @NotNull(message = "Shots cannot be null")
-        @Size(min = 1, message = "At least one shot is required")
-        private List<Shot> shots;
-
-        /**
-         * Shot object with duration and scene description
-         */
-        @Data
-        public static class Shot {
-
-            /**
-             * Duration in seconds
-             */
-            @NotNull(message = "Duration cannot be null")
-            @Positive(message = "Duration must be positive")
-            private Double duration;
-
-            /**
-             * Scene description/prompt
-             */
-            @NotBlank(message = "Scene description cannot be empty")
-            private String scene;
-        }
+        @NotBlank(message = "Scene description cannot be empty")
+        private String scene;
     }
 
     /**
@@ -90,15 +76,15 @@ public class SoraProStoryboardDTO {
      */
     @AssertTrue(message = "Total shots duration must match nFrames value")
     public boolean isDurationValid() {
-        if (input == null || input.getShots() == null || input.getNFrames() == null) {
+        if (getShots() == null || getNFrames() == null) {
             return false;
         }
 
-        double totalDuration = input.getShots().stream()
-                .mapToDouble(SoraProStoryboardInput.Shot::getDuration)
+        double totalDuration = getShots().stream()
+                .mapToDouble(Shot::getDuration)
                 .sum();
 
-        int nFrames = Integer.parseInt(input.getNFrames());
+        int nFrames = Integer.parseInt(getNFrames());
         return Math.abs(totalDuration - nFrames) < 0.1; // Allow small floating point difference
     }
 
@@ -107,8 +93,8 @@ public class SoraProStoryboardDTO {
      */
     @AssertTrue(message = "Image files must be JPEG, PNG, or WebP and under 10MB")
     public boolean isImageFilesFormatValid() {
-        if (input != null && input.getImageFiles() != null) {
-            return input.getImageFiles().stream()
+        if (getImageFiles() != null) {
+            return getImageFiles().stream()
                     .allMatch(file -> file.isEmpty() ||
                             (file.getContentType() != null &&
                                     (file.getContentType().equals("image/jpeg") ||

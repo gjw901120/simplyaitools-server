@@ -28,23 +28,23 @@ public interface ImageFeignClient {
      * 生成GPT-4o图像
      */
     @PostMapping("/api/v1/gpt4o-image/generate")
-    ImageGenerateResponse generateImage(@Valid @RequestBody Gpt4oImageGenerateRequest request);
+    ImageGenerateResponse gpt4oImageGenerate(@Valid @RequestBody Gpt4oImageGenerateRequest request);
 
     /**
      * 生成/编辑flux-kontext图像
      */
     @PostMapping("/api/v1/flux/kontext/generate")
-    ImageGenerateResponse generateOrEditImage(@Valid @RequestBody FluxKontextImageRequest request);
+    ImageGenerateResponse fluxKontextGenerate(@Valid @RequestBody FluxKontextImageRequest request);
 
     /**
      * 生成图像
      */
     @PostMapping("/api/v1/nano-banana/generate")
-    ImageGenerateResponse generateImage(@Valid @RequestBody NanoBananaGenerateRequest request);
+    ImageGenerateResponse nanoBananaGenerate(@Valid @RequestBody NanoBananaGenerateRequest request);
 
     /**
      * 编辑图像
      */
     @PostMapping("/api/v1/nano-banana/edit")
-    ImageGenerateResponse editImage(@Valid @RequestBody NanoBananaEditRequest request);
+    ImageGenerateResponse nanoBananaEdit(@Valid @RequestBody NanoBananaEditRequest request);
 }

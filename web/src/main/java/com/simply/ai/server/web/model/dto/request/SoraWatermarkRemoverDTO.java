@@ -19,22 +19,9 @@ public class SoraWatermarkRemoverDTO {
     private String model;
 
     /**
-     * Input parameters object
+     * Video URL for watermark removal
      */
-    @Valid
-    @NotNull(message = "Input cannot be null")
-    private SoraWatermarkRemoverInput input;
+    @NotBlank(message = "Video URL cannot be empty")
+    private String videoUrl;
 
-    /**
-     * Inner input class
-     */
-    @Data
-    public static class SoraWatermarkRemoverInput {
-
-        /**
-         * Video URL for watermark removal
-         */
-        @NotBlank(message = "Video URL cannot be empty")
-        private String videoUrl;
-    }
 }

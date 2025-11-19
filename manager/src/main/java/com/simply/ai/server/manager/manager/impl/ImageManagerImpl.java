@@ -21,32 +21,32 @@ public class ImageManagerImpl implements ImageManager {
      * 生成GPT-4o图像
      */
     @Override
-    public ImageGenerateResponse generateImage(Gpt4oImageGenerateRequest request) {
-        return imageFeignClient.generateImage(request);
+    public ImageGenerateResponse gpt4oImageGenerate(Gpt4oImageGenerateRequest request) {
+        return imageFeignClient.gpt4oImageGenerate(request);
     }
 
     /**
      * 生成/编辑flux-kontext图像
      */
     @Override
-    public ImageGenerateResponse generateOrEditImage(FluxKontextImageRequest request) {
-        return imageFeignClient.generateOrEditImage(request);
+    public ImageGenerateResponse fluxKontextGenerate(FluxKontextImageRequest request) {
+        return imageFeignClient.fluxKontextGenerate(request);
     }
 
     /**
      * 生成图像
      */
     @Override
-    public ImageGenerateResponse generateImage(NanoBananaGenerateRequest request) {
-        return imageFeignClient.generateImage(request);
+    public ImageGenerateResponse nanoBananaGenerate(NanoBananaGenerateRequest request) {
+        return imageFeignClient.nanoBananaGenerate(request);
     }
 
     /**
      * 编辑图像
      */
     @Override
-    public ImageGenerateResponse editImage(NanoBananaEditRequest request) {
-        return imageFeignClient.editImage(request);
+    public ImageGenerateResponse nanoBananaEdit(NanoBananaEditRequest request) {
+        return imageFeignClient.nanoBananaEdit(request);
     }
 
 }

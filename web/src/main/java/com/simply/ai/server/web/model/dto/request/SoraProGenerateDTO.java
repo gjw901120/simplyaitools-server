@@ -3,6 +3,8 @@ package com.simply.ai.server.web.model.dto.request;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -20,61 +22,47 @@ public class SoraProGenerateDTO {
     private String model;
 
     /**
-     * Input parameters object
+     * The text prompt describing the desired video motion
      */
-    @Valid
-    @NotNull(message = "Input cannot be null")
-    private SoraProInput input;
+    @NotBlank(message = "Prompt cannot be empty")
+    @Size(max = 10000, message = "Prompt cannot exceed 10000 characters")
+    private String prompt;
 
     /**
-     * Inner input class
+     * URL of the image to use as the first frame
      */
-    @Data
-    public static class SoraProInput {
+    private List<MultipartFile> imageFiles;
 
-        /**
-         * The text prompt describing the desired video motion
-         */
-        @NotBlank(message = "Prompt cannot be empty")
-        @Size(max = 10000, message = "Prompt cannot exceed 10000 characters")
-        private String prompt;
+    /**
+     * Aspect ratio of the image
+     */
+    @Pattern(regexp = "portrait|landscape", message = "Aspect ratio must be portrait or landscape")
+    private String aspectRatio;
 
-        /**
-         * URL of the image to use as the first frame
-         */
-        private List<@NotBlank String> imageUrls;
+    /**
+     * The number of frames to be generated
+     */
+    @Pattern(regexp = "10|15", message = "Number of frames must be 10 or 15")
+    private String nFrames;
 
-        /**
-         * Aspect ratio of the image
-         */
-        @Pattern(regexp = "portrait|landscape", message = "Aspect ratio must be portrait or landscape")
-        private String aspectRatio;
+    /**
+     * The quality or size of the generated image
+     */
+    @Pattern(regexp = "standard|high", message = "Size must be standard or high")
+    private String size;
 
-        /**
-         * The number of frames to be generated
-         */
-        @Pattern(regexp = "10|15", message = "Number of frames must be 10 or 15")
-        private String nFrames;
-
-        /**
-         * The quality or size of the generated image
-         */
-        @Pattern(regexp = "standard|high", message = "Size must be standard or high")
-        private String size;
-
-        /**
-         * When enabled, removes watermarks from the generated video
-         */
-        private Boolean removeWatermark;
-    }
+    /**
+     * When enabled, removes watermarks from the generated video
+     */
+    private Boolean removeWatermark;
 
     /**
      * Custom validation for imageUrls requirement based on model
      */
-    @AssertTrue(message = "Image URLs are required for sora-2-pro-text-to-video model")
+    @AssertTrue(message = "Image URLs are required for sora-2-pro-image-to-video model")
     public boolean isImageUrlsValid() {
         if ("sora-2-pro-text-to-video".equals(model)) {
-            return input != null && input.getImageUrls() != null && !input.getImageUrls().isEmpty();
+            return getImageFiles() != null && !getImageFiles().isEmpty();
         }
         return true;
     }

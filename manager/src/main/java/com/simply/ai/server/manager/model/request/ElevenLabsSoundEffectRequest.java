@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simply.ai.server.manager.constant.ElevenLabsConstant;
 import com.simply.ai.server.manager.enums.ElevenLabsModelEnum;
 import com.simply.ai.server.manager.enums.ElevenLabsOutputFormatEnum;
@@ -9,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -18,6 +20,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class ElevenLabsSoundEffectRequest extends ElevenLabsBaseRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -64,6 +67,7 @@ public class ElevenLabsSoundEffectRequest extends ElevenLabsBaseRequest implemen
     @Data
     public static class SoundEffectInput implements Serializable {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -81,25 +85,28 @@ public class ElevenLabsSoundEffectRequest extends ElevenLabsBaseRequest implemen
         /**
          * 持续时间（秒）
          */
-        private Double duration_seconds;
+        @JsonProperty("duration_seconds")
+        private Double durationSeconds;
 
         /**
          * 提示词影响力
          */
-        private Double prompt_influence;
+        @JsonProperty("prompt_influence")
+        private Double promptInfluence;
 
         /**
          * 输出格式
          */
-        private String output_format;
+        @JsonProperty("output_format")
+        private String outputFormat;
 
         /**
          * 业务参数校验
          */
         public void validateBusinessRules() {
-            validateRange(duration_seconds, ElevenLabsConstant.MIN_DURATION, ElevenLabsConstant.MAX_DURATION,
+            validateRange(durationSeconds, ElevenLabsConstant.MIN_DURATION, ElevenLabsConstant.MAX_DURATION,
                     ElevenLabsConstant.STEP_DURATION, "持续时间");
-            validateRange(prompt_influence, ElevenLabsConstant.MIN_PROMPT_INFLUENCE, ElevenLabsConstant.MAX_PROMPT_INFLUENCE,
+            validateRange(promptInfluence, ElevenLabsConstant.MIN_PROMPT_INFLUENCE, ElevenLabsConstant.MAX_PROMPT_INFLUENCE,
                     ElevenLabsConstant.STEP_SMALL, "提示词影响力");
         }
 

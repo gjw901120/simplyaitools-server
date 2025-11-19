@@ -3,6 +3,7 @@ package com.simply.ai.server.manager.model.response;
 import com.simply.ai.server.manager.enums.SunoResponseCodeEnum;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Data
 public class SunoMusicResponse implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

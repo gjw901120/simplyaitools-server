@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simply.ai.server.manager.constant.NanoBananaConstant;
 import com.simply.ai.server.manager.enums.NanoBananaAspectRatioEnum;
 import com.simply.ai.server.manager.enums.NanoBananaOutputFormatEnum;
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import java.util.List;
 @Data
 public class NanoBananaEditRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -40,6 +43,7 @@ public class NanoBananaEditRequest implements Serializable {
 
     @Data
     public static class Input implements Serializable {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -54,18 +58,21 @@ public class NanoBananaEditRequest implements Serializable {
          */
         @NotNull(message = "输入图像URL列表不能为空")
         @Size(min = 1, max = NanoBananaConstant.MAX_IMAGES_EDIT, message = "输入图像数量必须在1到" + NanoBananaConstant.MAX_IMAGES_EDIT + "之间")
-        private List<@URL(message = "图像URL格式不正确") String> image_urls;
+        @JsonProperty("image_urls")
+        private List<@URL(message = "图像URL格式不正确") String> imageUrls;
 
         /**
          * 输出格式
          */
-        private NanoBananaOutputFormatEnum output_format = NanoBananaOutputFormatEnum.PNG;
+        @JsonProperty("output_format")
+        private NanoBananaOutputFormatEnum outputFormat = NanoBananaOutputFormatEnum.PNG;
 
         /**
          * 图像尺寸比例
          */
         @NotNull(message = "图像尺寸比例不能为空")
-        private NanoBananaAspectRatioEnum image_size = NanoBananaAspectRatioEnum.RATIO_1_1;
+        @JsonProperty("image_size")
+        private NanoBananaAspectRatioEnum imageSize = NanoBananaAspectRatioEnum.RATIO_1_1;
     }
 
     /**
@@ -81,8 +88,8 @@ public class NanoBananaEditRequest implements Serializable {
 
         Input input = new Input();
         input.setPrompt(prompt);
-        input.setImage_urls(imageUrls);
-        input.setImage_size(imageSize);
+        input.setImageUrls(imageUrls);
+        input.setImageSize(imageSize);
         request.setInput(input);
 
         return request;
@@ -97,7 +104,7 @@ public class NanoBananaEditRequest implements Serializable {
                                                          NanoBananaOutputFormatEnum outputFormat,
                                                          String callBackUrl) {
         NanoBananaEditRequest request = buildEditRequest(prompt, imageUrls, imageSize, callBackUrl);
-        request.getInput().setOutput_format(outputFormat);
+        request.getInput().setOutputFormat(outputFormat);
         return request;
     }
 
@@ -112,11 +119,11 @@ public class NanoBananaEditRequest implements Serializable {
             }
 
             // 验证图像数量
-            if (input.getImage_urls() != null) {
-                if (input.getImage_urls().size() > NanoBananaConstant.MAX_IMAGES_EDIT) {
+            if (input.getImageUrls() != null) {
+                if (input.getImageUrls().size() > NanoBananaConstant.MAX_IMAGES_EDIT) {
                     throw new IllegalArgumentException("输入图像数量超过限制");
                 }
-                if (input.getImage_urls().isEmpty()) {
+                if (input.getImageUrls().isEmpty()) {
                     throw new IllegalArgumentException("至少需要提供一个输入图像");
                 }
             }

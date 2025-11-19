@@ -1,6 +1,6 @@
-// ElevenLabsTTSRequest.java
 package com.simply.ai.server.manager.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simply.ai.server.manager.constant.ElevenLabsConstant;
 import com.simply.ai.server.manager.enums.ElevenLabsModelEnum;
 import com.simply.ai.server.manager.enums.ElevenLabsVoiceEnum;
@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class ElevenLabsTTSRequest extends ElevenLabsBaseRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -67,6 +69,7 @@ public class ElevenLabsTTSRequest extends ElevenLabsBaseRequest implements Seria
     @Data
     public static class TTSInput implements Serializable {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -89,7 +92,8 @@ public class ElevenLabsTTSRequest extends ElevenLabsBaseRequest implements Seria
         /**
          * 相似度提升 (0-1)
          */
-        private Double similarity_boost;
+        @JsonProperty("similarity_boost")
+        private Double similarityBoost;
 
         /**
          * 风格夸张程度 (0-1)
@@ -110,19 +114,22 @@ public class ElevenLabsTTSRequest extends ElevenLabsBaseRequest implements Seria
          * 前文内容
          */
         @Size(max = ElevenLabsConstant.TEXT_MAX_LENGTH, message = "前文长度不能超过" + ElevenLabsConstant.TEXT_MAX_LENGTH + "个字符")
-        private String previous_text;
+        @JsonProperty("previous_text")
+        private String previousText;
 
         /**
          * 后文内容
          */
         @Size(max = ElevenLabsConstant.TEXT_MAX_LENGTH, message = "后文长度不能超过" + ElevenLabsConstant.TEXT_MAX_LENGTH + "个字符")
-        private String next_text;
+        @JsonProperty("next_text")
+        private String nextText;
 
         /**
          * 语言代码
          */
         @Size(max = ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH, message = "语言代码长度不能超过" + ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH + "个字符")
-        private String language_code;
+        @JsonProperty("language_code")
+        private String languageCode;
 
         /**
          * 业务参数校验
@@ -130,16 +137,16 @@ public class ElevenLabsTTSRequest extends ElevenLabsBaseRequest implements Seria
         public void validateBusinessRules() {
             validateRange(stability, ElevenLabsConstant.MIN_STABILITY, ElevenLabsConstant.MAX_STABILITY,
                     ElevenLabsConstant.STEP_SMALL, "语音稳定性");
-            validateRange(similarity_boost, ElevenLabsConstant.MIN_SIMILARITY_BOOST, ElevenLabsConstant.MAX_SIMILARITY_BOOST,
+            validateRange(similarityBoost, ElevenLabsConstant.MIN_SIMILARITY_BOOST, ElevenLabsConstant.MAX_SIMILARITY_BOOST,
                     ElevenLabsConstant.STEP_SMALL, "相似度提升");
             validateRange(style, ElevenLabsConstant.MIN_STYLE, ElevenLabsConstant.MAX_STYLE,
                     ElevenLabsConstant.STEP_SMALL, "风格夸张程度");
             validateRange(speed, ElevenLabsConstant.MIN_SPEED, ElevenLabsConstant.MAX_SPEED,
                     ElevenLabsConstant.STEP_SMALL, "语速");
 
-            validateTextLength(previous_text, ElevenLabsConstant.TEXT_MAX_LENGTH, "前文");
-            validateTextLength(next_text, ElevenLabsConstant.TEXT_MAX_LENGTH, "后文");
-            validateTextLength(language_code, ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH, "语言代码");
+            validateTextLength(previousText, ElevenLabsConstant.TEXT_MAX_LENGTH, "前文");
+            validateTextLength(nextText, ElevenLabsConstant.TEXT_MAX_LENGTH, "后文");
+            validateTextLength(languageCode, ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH, "语言代码");
         }
 
         private void validateRange(Double value, Double min, Double max, Double step, String fieldName) {

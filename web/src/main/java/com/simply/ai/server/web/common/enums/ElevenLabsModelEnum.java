@@ -1,8 +1,11 @@
 package com.simply.ai.server.web.common.enums;
 
+import lombok.Getter;
+
 /**
  * ElevenLabs模型枚举
  */
+@Getter
 public enum ElevenLabsModelEnum {
 
     TEXT_TO_SPEECH_TURBO("elevenlabs/text-to-speech-turbo-2-5", "文本转语音Turbo模型"),
@@ -17,14 +20,6 @@ public enum ElevenLabsModelEnum {
     ElevenLabsModelEnum(String code, String description) {
         this.code = code;
         this.description = description;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public static ElevenLabsModelEnum getByCode(String code) {

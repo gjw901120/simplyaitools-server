@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simply.ai.server.manager.constant.NanoBananaConstant;
 import com.simply.ai.server.manager.enums.NanoBananaAspectRatioEnum;
 import com.simply.ai.server.manager.enums.NanoBananaOutputFormatEnum;
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -17,6 +19,7 @@ import java.io.Serializable;
 @Data
 public class NanoBananaGenerateRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -39,6 +42,7 @@ public class NanoBananaGenerateRequest implements Serializable {
 
     @Data
     public static class Input implements Serializable {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -51,13 +55,15 @@ public class NanoBananaGenerateRequest implements Serializable {
         /**
          * 输出格式
          */
-        private NanoBananaOutputFormatEnum output_format = NanoBananaOutputFormatEnum.PNG;
+        @JsonProperty("output_format")
+        private NanoBananaOutputFormatEnum outputFormat = NanoBananaOutputFormatEnum.PNG;
 
         /**
          * 图像尺寸比例
          */
         @NotNull(message = "图像尺寸比例不能为空")
-        private NanoBananaAspectRatioEnum image_size = NanoBananaAspectRatioEnum.RATIO_1_1;
+        @JsonProperty("image_size")
+        private NanoBananaAspectRatioEnum imageSize = NanoBananaAspectRatioEnum.RATIO_1_1;
     }
 
     /**
@@ -72,7 +78,7 @@ public class NanoBananaGenerateRequest implements Serializable {
 
         Input input = new Input();
         input.setPrompt(prompt);
-        input.setImage_size(imageSize);
+        input.setImageSize(imageSize);
         request.setInput(input);
 
         return request;
@@ -86,7 +92,7 @@ public class NanoBananaGenerateRequest implements Serializable {
                                                                  NanoBananaOutputFormatEnum outputFormat,
                                                                  String callBackUrl) {
         NanoBananaGenerateRequest request = buildGenerateRequest(prompt, imageSize, callBackUrl);
-        request.getInput().setOutput_format(outputFormat);
+        request.getInput().setOutputFormat(outputFormat);
         return request;
     }
 

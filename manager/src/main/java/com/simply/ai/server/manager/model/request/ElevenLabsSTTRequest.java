@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simply.ai.server.manager.constant.ElevenLabsConstant;
 import com.simply.ai.server.manager.enums.ElevenLabsModelEnum;
 import lombok.Data;
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -18,6 +20,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class ElevenLabsSTTRequest extends ElevenLabsBaseRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -52,7 +55,7 @@ public class ElevenLabsSTTRequest extends ElevenLabsBaseRequest implements Seria
         request.setCallBackUrl(callBackUrl);
 
         STTInput input = new STTInput();
-        input.setAudio_url(audioUrl);
+        input.setAudioUrl(audioUrl);
         request.setInput(input);
 
         return request;
@@ -64,6 +67,7 @@ public class ElevenLabsSTTRequest extends ElevenLabsBaseRequest implements Seria
     @Data
     public static class STTInput implements Serializable {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -71,18 +75,21 @@ public class ElevenLabsSTTRequest extends ElevenLabsBaseRequest implements Seria
          */
         @NotBlank(message = "音频URL不能为空")
         @URL(message = "音频URL格式不正确")
-        private String audio_url;
+        @JsonProperty("audio_url")
+        private String audioUrl;
 
         /**
          * 语言代码
          */
         @Size(max = ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH, message = "语言代码长度不能超过" + ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH + "个字符")
-        private String language_code;
+        @JsonProperty("language_code")
+        private String languageCode;
 
         /**
          * 是否标记音频事件
          */
-        private Boolean tag_audio_events;
+        @JsonProperty("tag_audio_events")
+        private Boolean tagAudioEvents;
 
         /**
          * 是否标注说话人
@@ -93,7 +100,7 @@ public class ElevenLabsSTTRequest extends ElevenLabsBaseRequest implements Seria
          * 业务参数校验
          */
         public void validateBusinessRules() {
-            validateTextLength(language_code, ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH, "语言代码");
+            validateTextLength(languageCode, ElevenLabsConstant.LANGUAGE_CODE_MAX_LENGTH, "语言代码");
         }
 
         private void validateTextLength(String text, int maxLength, String fieldName) {

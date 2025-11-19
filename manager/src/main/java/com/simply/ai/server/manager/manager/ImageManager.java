@@ -12,21 +12,21 @@ public interface ImageManager {
     /**
      * 生成GPT-4o图像
      */
-    ImageGenerateResponse generateImage(Gpt4oImageGenerateRequest request);
+    ImageGenerateResponse gpt4oImageGenerate(Gpt4oImageGenerateRequest request);
 
     /**
      * 生成/编辑flux-kontext图像
      */
-    ImageGenerateResponse generateOrEditImage(FluxKontextImageRequest request);
+    ImageGenerateResponse fluxKontextGenerate(FluxKontextImageRequest request);
 
     /**
      * 生成图像
      */
-    ImageGenerateResponse generateImage(NanoBananaGenerateRequest request);
+    ImageGenerateResponse nanoBananaGenerate(NanoBananaGenerateRequest request);
 
     /**
      * 编辑图像
      */
-    ImageGenerateResponse editImage(NanoBananaEditRequest request);
+    ImageGenerateResponse nanoBananaEdit(NanoBananaEditRequest request);
 
 }

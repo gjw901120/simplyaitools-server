@@ -21,49 +21,34 @@ public class SoraGenerateDTO {
             message = "Model must be sora-2-image-to-video or sora-2-text-to-video")
     private String model;
 
+    /**
+     * The text prompt describing the desired video motion
+     */
+    @NotBlank(message = "Prompt cannot be empty")
+    @Size(max = 10000, message = "Prompt cannot exceed 10000 characters")
+    private String prompt;
 
     /**
-     * Input parameters object
+     * Image files to use as the first frame
      */
-    @Valid
-    @NotNull(message = "Input cannot be null")
-    private SoraInput input;
+    private List<MultipartFile> imageFiles;
 
     /**
-     * Inner input class
+     * Aspect ratio of the image
      */
-    @Data
-    public static class SoraInput {
+    @Pattern(regexp = "portrait|landscape", message = "Aspect ratio must be portrait or landscape")
+    private String aspectRatio;
 
-        /**
-         * The text prompt describing the desired video motion
-         */
-        @NotBlank(message = "Prompt cannot be empty")
-        @Size(max = 10000, message = "Prompt cannot exceed 10000 characters")
-        private String prompt;
+    /**
+     * The number of frames to be generated
+     */
+    @Pattern(regexp = "10|15", message = "Number of frames must be 10 or 15")
+    private String nFrames;
 
-        /**
-         * Image files to use as the first frame
-         */
-        private List<MultipartFile> imageFiles;
-
-        /**
-         * Aspect ratio of the image
-         */
-        @Pattern(regexp = "portrait|landscape", message = "Aspect ratio must be portrait or landscape")
-        private String aspectRatio;
-
-        /**
-         * The number of frames to be generated
-         */
-        @Pattern(regexp = "10|15", message = "Number of frames must be 10 or 15")
-        private String nFrames;
-
-        /**
-         * When enabled, removes watermarks from the generated video
-         */
-        private Boolean removeWatermark;
-    }
+    /**
+     * When enabled, removes watermarks from the generated video
+     */
+    private Boolean removeWatermark;
 
     /**
      * Custom validation for imageFiles requirement based on model
@@ -71,9 +56,9 @@ public class SoraGenerateDTO {
     @AssertTrue(message = "Image files are required for sora-2-image-to-video model")
     public boolean isImageFilesValid() {
         if ("sora-2-image-to-video".equals(model)) {
-            return input != null && input.getImageFiles() != null &&
-                    !input.getImageFiles().isEmpty() &&
-                    input.getImageFiles().stream().noneMatch(MultipartFile::isEmpty);
+            return getImageFiles() != null &&
+                    !getImageFiles().isEmpty() &&
+                    getImageFiles().stream().noneMatch(MultipartFile::isEmpty);
         }
         return true;
     }

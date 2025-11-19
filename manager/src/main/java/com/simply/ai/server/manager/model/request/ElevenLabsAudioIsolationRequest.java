@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simply.ai.server.manager.enums.ElevenLabsModelEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,6 +8,7 @@ import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -16,6 +18,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class ElevenLabsAudioIsolationRequest extends ElevenLabsBaseRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -50,7 +53,7 @@ public class ElevenLabsAudioIsolationRequest extends ElevenLabsBaseRequest imple
         request.setCallBackUrl(callBackUrl);
 
         AudioIsolationInput input = new AudioIsolationInput();
-        input.setAudio_url(audioUrl);
+        input.setAudioUrl(audioUrl);
         request.setInput(input);
 
         return request;
@@ -62,6 +65,7 @@ public class ElevenLabsAudioIsolationRequest extends ElevenLabsBaseRequest imple
     @Data
     public static class AudioIsolationInput implements Serializable {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -69,7 +73,8 @@ public class ElevenLabsAudioIsolationRequest extends ElevenLabsBaseRequest imple
          */
         @NotBlank(message = "音频URL不能为空")
         @URL(message = "音频URL格式不正确")
-        private String audio_url;
+        @JsonProperty("audio_url")
+        private String audioUrl;
 
         /**
          * 业务参数校验
