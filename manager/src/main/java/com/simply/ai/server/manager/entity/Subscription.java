@@ -3,13 +3,17 @@ package com.simply.ai.server.manager.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.simply.ai.server.manager.enums.SubscriptionPackageEnum;
 import com.simply.ai.server.manager.enums.SubscriptionTypeEnum;
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 @TableName("subscription")
+@Accessors(chain = true)
 public class Subscription {
 
     @TableId(type = IdType.AUTO)
@@ -26,17 +30,35 @@ public class Subscription {
     private Integer status;
 
     @TableField("`package`")
-    private SubscriptionPackageEnum SubscriptionPackage;
+    private SubscriptionPackageEnum subscriptionPackage;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    private Integer isDel;
+    @Builder.Default
+    private Integer isDel = 0;
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime gmtModified;
+
+    /**
+     * 创建订阅对象的便捷方法
+     */
+    public static Subscription create(Integer orderId, Integer userId, String stripeSubscriptionId, SubscriptionTypeEnum type,
+                                      Integer status, SubscriptionPackageEnum subscriptionPackage, LocalDate startDate, LocalDate endDate) {
+        return Subscription.builder()
+                .orderId(orderId)
+                .userId(userId)
+                .stripeSubscriptionId(stripeSubscriptionId)
+                .type(type)
+                .status(status)
+                .subscriptionPackage(subscriptionPackage)
+                .startDate(startDate)
+                .endDate(endDate)
+                .build();
+    }
 }

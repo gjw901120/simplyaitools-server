@@ -35,8 +35,7 @@ public class VideoController {
 
         request.validateAspectRatioWithException();
 
-        veoGenerateService.generateVideo(request);
-        return ResponseResult.success();
+        return ResponseResult.success(veoGenerateService.generateVideo(request));
     }
 
     @PostMapping("/veo/extend")

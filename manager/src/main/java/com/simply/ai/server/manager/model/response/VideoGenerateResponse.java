@@ -4,6 +4,7 @@ package com.simply.ai.server.manager.model.response;
 import com.simply.ai.server.manager.enums.ResponseCodeEnum;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Data
 public class VideoGenerateResponse implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -55,6 +57,7 @@ public class VideoGenerateResponse implements Serializable {
     @Data
     public static class VideoData implements Serializable {
 
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**

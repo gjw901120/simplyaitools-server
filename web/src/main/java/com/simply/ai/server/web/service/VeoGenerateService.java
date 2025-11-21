@@ -2,6 +2,7 @@ package com.simply.ai.server.web.service;
 
 import com.simply.ai.server.web.model.dto.request.VeoExtendDTO;
 import com.simply.ai.server.web.model.dto.request.VeoGenerateDTO;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 
 /**
@@ -12,7 +13,7 @@ public interface VeoGenerateService {
     /**
      * 生成视频
      */
-    void generateVideo(VeoGenerateDTO request);
+    BaseResponse generateVideo(VeoGenerateDTO request);
 
     /**
      * 扩展视频

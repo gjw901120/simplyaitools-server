@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.manager.impl;
 
+
 import com.simply.ai.server.manager.feign.client.VideoFeignClient;
 import com.simply.ai.server.manager.manager.VideoManager;
 import com.simply.ai.server.manager.model.request.*;
@@ -16,6 +17,7 @@ public class VideoManagerImpl implements VideoManager {
 
     @Override
     public VideoGenerateResponse veoGenerate(VeoGenerateRequest request) {
+
         return videoFeignClient.veoGenerate(request);
     }
 
