@@ -1,6 +1,6 @@
 package com.simply.ai.server.web.service.impl;
 
-import com.simply.ai.server.manager.enums.ElevenLabsModelEnum;
+import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ElevenLabsResponseCodeEnum;
 import com.simply.ai.server.manager.manager.ElevenLabsManager;
 import com.simply.ai.server.manager.model.request.ElevenLabsAudioIsolationRequest;
@@ -12,12 +12,18 @@ import com.simply.ai.server.web.model.dto.request.ElevenlabsAudioIsolationDTO;
 import com.simply.ai.server.web.model.dto.request.ElevenlabsSTTDTO;
 import com.simply.ai.server.web.model.dto.request.ElevenlabsSoundEffectDTO;
 import com.simply.ai.server.web.model.dto.request.ElevenlabsTTSDTO;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
 import com.simply.ai.server.web.service.ElevenlabsService;
+import com.simply.ai.server.web.service.RecordsService;
 import com.simply.common.core.exception.BaseException;
 import com.simply.common.core.exception.error.ThirdpartyErrorType;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class ElevenlabsServiceImpl implements ElevenlabsService {
@@ -25,8 +31,11 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
     @Autowired
     private ElevenLabsManager elevenLabsManager;
 
+    @Autowired
+    private RecordsService recordsService;
+
     @Override
-    public void elevenlabsTTS(ElevenlabsTTSDTO elevenlabsTTSDTO) {
+    public BaseResponse elevenlabsTTS(ElevenlabsTTSDTO elevenlabsTTSDTO) {
 
         // 实现视频生成逻辑
         ElevenLabsTTSRequest request = new ElevenLabsTTSRequest();
@@ -45,10 +54,28 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMessage());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create(elevenlabsTTSDTO.getModel(), userModelTask));
+
     }
 
     @Override
-    public void elevenlabsSTT(ElevenlabsSTTDTO elevenlabsSTTDTO) {
+    public BaseResponse elevenlabsSTT(ElevenlabsSTTDTO elevenlabsSTTDTO) {
 
         // 实现视频生成逻辑
         ElevenLabsSTTRequest request = new ElevenLabsSTTRequest();
@@ -59,6 +86,14 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
 
         BeanUtils.copyProperties(elevenlabsSTTDTO, input);
 
+        List<String> inputUrls = new ArrayList<>();
+
+        String audioUrl = "";
+
+        inputUrls.add(audioUrl);
+
+        input.setAudioUrl(audioUrl);
+
         request.setInput(input);
 
         ElevenLabsResponse response = elevenLabsManager.speechToText(request);
@@ -67,10 +102,28 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMessage());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("elevenlabs_speech_to_text", userModelTask));
+
     }
 
     @Override
-    public void elevenlabsAudioIsolationDTO(ElevenlabsAudioIsolationDTO elevenlabsAudioIsolationDTO) {
+    public BaseResponse elevenlabsAudioIsolationDTO(ElevenlabsAudioIsolationDTO elevenlabsAudioIsolationDTO) {
 
         // 实现视频生成逻辑
         ElevenLabsAudioIsolationRequest request = new ElevenLabsAudioIsolationRequest();
@@ -81,6 +134,14 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
 
         BeanUtils.copyProperties(elevenlabsAudioIsolationDTO, input);
 
+        List<String> inputUrls = new ArrayList<>();
+
+        String audioUrl = "";
+
+        inputUrls.add(audioUrl);
+
+        input.setAudioUrl(audioUrl);
+
         request.setInput(input);
 
         ElevenLabsResponse response = elevenLabsManager.isolateAudio(request);
@@ -89,10 +150,28 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMessage());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("elevenlabs_audio_isolation", userModelTask));
+
     }
 
     @Override
-    public void elevenlabsSoundEffectDTO(ElevenlabsSoundEffectDTO elevenlabsSoundEffectDTO) {
+    public BaseResponse elevenlabsSoundEffectDTO(ElevenlabsSoundEffectDTO elevenlabsSoundEffectDTO) {
 
         // 实现视频生成逻辑
         ElevenLabsSoundEffectRequest request = new ElevenLabsSoundEffectRequest();
@@ -110,6 +189,24 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
         if(!ElevenLabsResponseCodeEnum.SUCCESS.equals(response.getCode())) {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMessage());
         }
+
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("elevenlabs_sound_effect", userModelTask));
 
     }
 

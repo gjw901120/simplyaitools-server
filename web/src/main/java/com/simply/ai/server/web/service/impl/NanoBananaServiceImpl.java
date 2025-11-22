@@ -1,5 +1,6 @@
 package com.simply.ai.server.web.service.impl;
 
+import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ImageResponseCodeEnum;
 import com.simply.ai.server.manager.enums.NanoBananaAspectRatioEnum;
 import com.simply.ai.server.manager.enums.NanoBananaOutputFormatEnum;
@@ -9,13 +10,16 @@ import com.simply.ai.server.manager.model.request.NanoBananaGenerateRequest;
 import com.simply.ai.server.manager.model.response.ImageGenerateResponse;
 import com.simply.ai.server.web.model.dto.request.NanoBananaEditDTO;
 import com.simply.ai.server.web.model.dto.request.NanoBananaGenerateDTO;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
 import com.simply.ai.server.web.service.NanoBananaService;
+import com.simply.ai.server.web.service.RecordsService;
 import com.simply.common.core.exception.BaseException;
 import com.simply.common.core.exception.error.ThirdpartyErrorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -24,8 +28,11 @@ public class NanoBananaServiceImpl implements NanoBananaService {
     @Autowired
     private ImageManager imageManager;
 
+    @Autowired
+    private RecordsService recordsService;
+
     @Override
-    public void nanoBananaGenerate(NanoBananaGenerateDTO nanoBananaGenerateDTO) {
+    public BaseResponse nanoBananaGenerate(NanoBananaGenerateDTO nanoBananaGenerateDTO) {
 
         // 实现视频生成逻辑
         NanoBananaGenerateRequest request = new NanoBananaGenerateRequest();
@@ -43,10 +50,28 @@ public class NanoBananaServiceImpl implements NanoBananaService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMessage());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("nano_banana", userModelTask));
+
     }
 
     @Override
-    public void nanoBananaEdit(NanoBananaEditDTO nanoBananaEditDTO) {
+    public BaseResponse nanoBananaEdit(NanoBananaEditDTO nanoBananaEditDTO) {
 
         // 实现视频生成逻辑
         NanoBananaEditRequest request = new NanoBananaEditRequest();
@@ -58,6 +83,10 @@ public class NanoBananaServiceImpl implements NanoBananaService {
         input.setImageUrls(imageUrls);
         input.setOutputFormat(NanoBananaOutputFormatEnum.getByFormat(nanoBananaEditDTO.getOutputFormat()));
         input.setPrompt(nanoBananaEditDTO.getPrompt());
+        List<String> inputUrls = new ArrayList<>();
+
+        input.setImageUrls(inputUrls);
+
         request.setInput(input);
 
         ImageGenerateResponse response = imageManager.nanoBananaEdit(request);
@@ -65,6 +94,24 @@ public class NanoBananaServiceImpl implements NanoBananaService {
         if(!ImageResponseCodeEnum.SUCCESS.equals(response.getCode())) {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMessage());
         }
+
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("nano_banana", userModelTask));
 
     }
 

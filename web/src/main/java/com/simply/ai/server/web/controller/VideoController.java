@@ -41,9 +41,7 @@ public class VideoController {
     @PostMapping("/veo/extend")
     public ResponseResult<?> extendVideo(@Valid @RequestBody VeoExtendDTO request) {
 
-        veoGenerateService.extendVideo(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(veoGenerateService.extendVideo(request));
     }
 
     @PostMapping("/runway/generate")
@@ -57,25 +55,19 @@ public class VideoController {
     @PostMapping("/runway/extend")
     public ResponseResult<?> runwayExtend(@Valid @RequestBody RunwayExtendDTO request) {
 
-        runwayGenerateService.runwayExtend(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(runwayGenerateService.runwayExtend(request));
     }
 
     @PostMapping("/runway/aleph")
     public ResponseResult<?> runwayAleph(@Valid @RequestBody RunwayAlephDTO request) {
 
-        runwayGenerateService.runwayAleph(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(runwayGenerateService.runwayAleph(request));
     }
 
     @PostMapping("/luma/generate")
     public ResponseResult<?> lumaGenerate(@Valid @RequestBody LumaGenerateDTO request) {
 
-        lumaGenerateService.lumaGenerate(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(lumaGenerateService.lumaGenerate(request));
     }
 
 

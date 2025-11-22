@@ -1,14 +1,15 @@
 package com.simply.ai.server.web.service;
 
 import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 public interface SoraGenerateService {
 
-    void soraGenerate(SoraGenerateDTO request);
+    BaseResponse soraGenerate(SoraGenerateDTO request);
 
-    void soraProGenerate(SoraProGenerateDTO request);
+    BaseResponse soraProGenerate(SoraProGenerateDTO request);
 
-    void soraWatermarkRemover(SoraWatermarkRemoverDTO request);
+    BaseResponse soraWatermarkRemover(SoraWatermarkRemoverDTO request);
 
-    void soraProStoryboard(SoraProStoryboardDTO request);
+    BaseResponse soraProStoryboard(SoraProStoryboardDTO request);
 }

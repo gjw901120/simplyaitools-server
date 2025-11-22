@@ -24,33 +24,25 @@ public class ElevenLabsController {
     @PostMapping("/text-to-speech")
     public ResponseResult<?> textToSpeech(@Valid @RequestBody ElevenlabsTTSDTO request) {
 
-        elevenlabsService.elevenlabsTTS(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(elevenlabsService.elevenlabsTTS(request));
     }
 
     @PostMapping("/speech-to-text")
     public ResponseResult<?> speechToText(@Valid @RequestBody ElevenlabsSTTDTO request) {
 
-        elevenlabsService.elevenlabsSTT(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(elevenlabsService.elevenlabsSTT(request));
     }
 
     @PostMapping("/sound-effect-v2")
     public ResponseResult<?> soundEffectV2(@Valid @RequestBody ElevenlabsSoundEffectDTO request) {
 
-        elevenlabsService.elevenlabsSoundEffectDTO(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(elevenlabsService.elevenlabsSoundEffectDTO(request));
     }
 
     @PostMapping("/audio-isolation")
     public ResponseResult<?> audioIsolation(@Valid @RequestBody ElevenlabsAudioIsolationDTO request) {
 
-        elevenlabsService.elevenlabsAudioIsolationDTO(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(elevenlabsService.elevenlabsAudioIsolationDTO(request));
     }
 
 

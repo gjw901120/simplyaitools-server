@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Data
 public class LumaGenerateRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -20,8 +22,6 @@ public class LumaGenerateRequest implements Serializable {
      */
     @NotBlank(message = "提示词不能为空")
     @Size(min = 10, max = 2000, message = "提示词长度必须在10-2000个字符之间")
-    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-\\.\\,\\!\\?\\'\\\"\\:\\;\\(\\)\\[\\]\\{\\}]+$",
-            message = "提示词必须为英文，只支持字母数字和基本标点符号")
     private String prompt;
 
     /**

@@ -1,8 +1,9 @@
 package com.simply.ai.server.web.service;
 
 import com.simply.ai.server.web.model.dto.request.LumaGenerateDTO;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 public interface LumaGenerateService {
 
-    void lumaGenerate(LumaGenerateDTO request);
+    BaseResponse lumaGenerate(LumaGenerateDTO request);
 }

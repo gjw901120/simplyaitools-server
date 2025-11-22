@@ -18,6 +18,6 @@ public interface VeoGenerateService {
     /**
      * 扩展视频
      */
-    void extendVideo(VeoExtendDTO request);
+    BaseResponse extendVideo(VeoExtendDTO request);
 
 }

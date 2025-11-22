@@ -1,10 +1,13 @@
 package com.simply.ai.server.web.service.impl;
 
+import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.*;
 import com.simply.ai.server.manager.manager.SoraManager;
 import com.simply.ai.server.manager.model.request.*;
 import com.simply.ai.server.manager.model.response.VideoGenerateResponse;
 import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
+import com.simply.ai.server.web.service.RecordsService;
 import com.simply.ai.server.web.service.SoraGenerateService;
 import com.simply.common.core.exception.BaseException;
 import com.simply.common.core.exception.error.ThirdpartyErrorType;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -21,11 +25,16 @@ public class SoraGenerateServiceImpl implements SoraGenerateService {
     @Autowired
     private SoraManager soraManager;
 
+    @Autowired
+    private RecordsService recordsService;
+
     @Override
-    public void soraGenerate(SoraGenerateDTO soraGenerateDTO) {
+    public BaseResponse soraGenerate(SoraGenerateDTO soraGenerateDTO) {
         // 实现视频生成逻辑
         SoraGenerateRequest request = new SoraGenerateRequest();
         request.setModel(SoraModelEnum.getByCode(soraGenerateDTO.getModel()));
+
+        List<String> inputUrls = new ArrayList<>();
 
         if(soraGenerateDTO.getModel().equals(SoraModelEnum.SORA_2_TEXT_TO_VIDEO.getCode())) {
             SoraTextToVideoRequest soraRequest = new SoraTextToVideoRequest();
@@ -51,14 +60,33 @@ public class SoraGenerateServiceImpl implements SoraGenerateService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("sora", userModelTask));
+
     }
 
 
     @Override
-    public void soraProGenerate(SoraProGenerateDTO soraProGenerateDTO) {
+    public BaseResponse soraProGenerate(SoraProGenerateDTO soraProGenerateDTO) {
         // 实现视频生成逻辑
         SoraGenerateRequest request = new SoraGenerateRequest();
         request.setModel(SoraModelEnum.getByCode(soraProGenerateDTO.getModel()));
+
+        List<String> inputUrls = new ArrayList<>();
 
         if(soraProGenerateDTO.getModel().equals(SoraModelEnum.SORA_2_PRO_TEXT_TO_VIDEO.getCode())) {
             SoraProTextToVideoRequestRequest soraRequest = new SoraProTextToVideoRequestRequest();
@@ -86,21 +114,41 @@ public class SoraGenerateServiceImpl implements SoraGenerateService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("sora_pro", userModelTask));
+
     }
 
 
     @Override
-    public void soraWatermarkRemover(SoraWatermarkRemoverDTO soraWatermarkRemoverDTO) {
+    public BaseResponse soraWatermarkRemover(SoraWatermarkRemoverDTO soraWatermarkRemoverDTO) {
         // 实现视频生成逻辑
         SoraGenerateRequest request = new SoraGenerateRequest();
 
         SoraWatermarkRemoverRequest soraRequest = new SoraWatermarkRemoverRequest();
+
+        List<String> inputUrls = new ArrayList<>();
 
         request.setModel(SoraModelEnum.getByCode(soraWatermarkRemoverDTO.getModel()));
 
         soraRequest.setVideoUrl(soraWatermarkRemoverDTO.getVideoUrl());
 
         request.setInput(soraRequest);
+        inputUrls.add(soraWatermarkRemoverDTO.getVideoUrl());
 
         VideoGenerateResponse response = soraManager.soraWatermarkRemover(request);
 
@@ -108,15 +156,34 @@ public class SoraGenerateServiceImpl implements SoraGenerateService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("sora_watermark_remover", userModelTask));
+
     }
 
 
     @Override
-    public void soraProStoryboard(SoraProStoryboardDTO soraProStoryboardDTO) {
+    public BaseResponse soraProStoryboard(SoraProStoryboardDTO soraProStoryboardDTO) {
         // 实现视频生成逻辑
         SoraGenerateRequest request = new SoraGenerateRequest();
 
         SoraStoryboardRequest soraRequest = new SoraStoryboardRequest();
+
+        List<String> inputUrls = new ArrayList<>();
 
         soraRequest.setAspectRatio(SoraAspectRatioEnum.getByCode(soraProStoryboardDTO.getAspectRatio()));
         soraRequest.setNFrames(SoraFramesEnum.getByCode(soraProStoryboardDTO.getNFrames()));
@@ -138,6 +205,23 @@ public class SoraGenerateServiceImpl implements SoraGenerateService {
         if(!ResponseCodeEnum.SUCCESS.equals(response.getCode())) {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
+
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("sora_pro_storyboard", userModelTask));
 
     }
 }

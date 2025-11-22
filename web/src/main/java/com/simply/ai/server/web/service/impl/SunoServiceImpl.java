@@ -1,10 +1,13 @@
 package com.simply.ai.server.web.service.impl;
 
+import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.SunoResponseCodeEnum;
 import com.simply.ai.server.manager.manager.SunoManger;
 import com.simply.ai.server.manager.model.request.*;
 import com.simply.ai.server.manager.model.response.SunoMusicResponse;
 import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
+import com.simply.ai.server.web.service.RecordsService;
 import com.simply.ai.server.web.service.SunoService;
 import com.simply.common.core.exception.BaseException;
 import com.simply.common.core.exception.error.ThirdpartyErrorType;
@@ -12,14 +15,21 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 @Service
 public class SunoServiceImpl implements SunoService {
 
     @Autowired
     private SunoManger sunoManger;
 
+    @Autowired
+    private RecordsService recordsService;
+
     @Override
-    public void sunoGenerate(SunoGenerateDTO sunoGenerateDTO) {
+    public BaseResponse sunoGenerate(SunoGenerateDTO sunoGenerateDTO) {
 
         // 实现视频生成逻辑
         SunoGenerateRequest request = new SunoGenerateRequest();
@@ -32,10 +42,28 @@ public class SunoServiceImpl implements SunoService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("suno_generate", userModelTask));
+
     }
 
     @Override
-    public void sunoExtend(SunoExtendDTO sunoExtendDTO) {
+    public BaseResponse sunoExtend(SunoExtendDTO sunoExtendDTO) {
 
         // 实现视频生成逻辑
         SunoExtendRequest request = new SunoExtendRequest();
@@ -48,15 +76,41 @@ public class SunoServiceImpl implements SunoService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                new ArrayList<>(),
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("suno_extend", userModelTask));
+
     }
 
     @Override
-    public void sunoUploadCover(SunoUploadCoverDTO sunoUploadCoverDTO) {
+    public BaseResponse sunoUploadCover(SunoUploadCoverDTO sunoUploadCoverDTO) {
 
         // 实现视频生成逻辑
         SunoUploadCoverRequest request = new SunoUploadCoverRequest();
 
+        List<String> inputUrls = new ArrayList<>();
+
         BeanUtils.copyProperties(sunoUploadCoverDTO, request);
+
+        String uploadUrl = "";
+
+        inputUrls.add(uploadUrl);
+
+        request.setUploadUrl(uploadUrl);
 
         SunoMusicResponse response = sunoManger.uploadCover(request);
 
@@ -64,15 +118,41 @@ public class SunoServiceImpl implements SunoService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("suno_upload_cover", userModelTask));
+
     }
 
     @Override
-    public void sunoAddVocal(SunoAddVocalsDTO sunoAddVocalsDTO) {
+    public BaseResponse sunoAddVocal(SunoAddVocalsDTO sunoAddVocalsDTO) {
 
         // 实现视频生成逻辑
         SunoAddVocalsRequest request = new SunoAddVocalsRequest();
 
+        List<String> inputUrls = new ArrayList<>();
+
         BeanUtils.copyProperties(sunoAddVocalsDTO, request);
+
+        String uploadUrl = "";
+
+        inputUrls.add(uploadUrl);
+
+        request.setUploadUrl(uploadUrl);
 
         SunoMusicResponse response = sunoManger.addVocals(request);
 
@@ -80,15 +160,41 @@ public class SunoServiceImpl implements SunoService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("suno_add_vocals", userModelTask));
+
     }
 
     @Override
-    public void sunoUploadExtend(SunoUploadExtendDTO sunoUploadExtendDTO) {
+    public BaseResponse sunoUploadExtend(SunoUploadExtendDTO sunoUploadExtendDTO) {
 
         // 实现视频生成逻辑
         SunoUploadExtendRequest request = new SunoUploadExtendRequest();
 
         BeanUtils.copyProperties(sunoUploadExtendDTO, request);
+
+        List<String> inputUrls = new ArrayList<>();
+
+        String uploadUrl = "";
+
+        inputUrls.add(uploadUrl);
+
+        request.setUploadUrl(uploadUrl);
 
         SunoMusicResponse response = sunoManger.uploadExtend(request);
 
@@ -96,21 +202,65 @@ public class SunoServiceImpl implements SunoService {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
 
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("suno_upload_extend", userModelTask));
+
     }
 
     @Override
-    public void sunoAddInstrumental(SunoAddInstrumentalDTO sunoAddInstrumentalDTO) {
+    public BaseResponse sunoAddInstrumental(SunoAddInstrumentalDTO sunoAddInstrumentalDTO) {
 
         // 实现视频生成逻辑
         SunoAddInstrumentalRequest request = new SunoAddInstrumentalRequest();
 
         BeanUtils.copyProperties(sunoAddInstrumentalDTO, request);
 
+        List<String> inputUrls = new ArrayList<>();
+
+        String uploadUrl = "";
+
+        inputUrls.add(uploadUrl);
+
+        request.setUploadUrl(uploadUrl);
+
         SunoMusicResponse response = sunoManger.addInstrumental(request);
 
         if(!SunoResponseCodeEnum.SUCCESS.equals(response.getCode())) {
             throw new BaseException(ThirdpartyErrorType.THIRDPARTY_SERVER_ERROR, response.getMsg());
         }
+
+        //写入任务
+        UserModelTask userModelTask = UserModelTask.create(
+                0,
+                "",
+                0,
+                0,
+                1,
+                "",
+                response.getData().getTaskId(),
+                inputUrls,
+                new ArrayList<>(),
+                request,
+                new HashMap<>(),
+                new HashMap<>()
+        );
+
+        return new BaseResponse(recordsService.create("suno_add_instrumental", userModelTask));
 
     }
 

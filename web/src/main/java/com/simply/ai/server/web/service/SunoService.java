@@ -1,19 +1,20 @@
 package com.simply.ai.server.web.service;
 
 import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 public interface SunoService {
 
-    void sunoGenerate(SunoGenerateDTO request);
+    BaseResponse sunoGenerate(SunoGenerateDTO request);
 
-    void sunoExtend(SunoExtendDTO request);
+    BaseResponse sunoExtend(SunoExtendDTO request);
 
-    void sunoUploadCover(SunoUploadCoverDTO request);
+    BaseResponse sunoUploadCover(SunoUploadCoverDTO request);
 
-    void sunoAddVocal(SunoAddVocalsDTO request);
+    BaseResponse sunoAddVocal(SunoAddVocalsDTO request);
 
-    void sunoUploadExtend(SunoUploadExtendDTO request);
+    BaseResponse sunoUploadExtend(SunoUploadExtendDTO request);
 
-    void sunoAddInstrumental(SunoAddInstrumentalDTO request);
+    BaseResponse sunoAddInstrumental(SunoAddInstrumentalDTO request);
 
 }

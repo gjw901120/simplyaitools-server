@@ -2,11 +2,12 @@ package com.simply.ai.server.web.service;
 
 import com.simply.ai.server.web.model.dto.request.NanoBananaEditDTO;
 import com.simply.ai.server.web.model.dto.request.NanoBananaGenerateDTO;
+import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 public interface NanoBananaService {
 
-    void nanoBananaGenerate(NanoBananaGenerateDTO request);
+    BaseResponse nanoBananaGenerate(NanoBananaGenerateDTO request);
 
-    void nanoBananaEdit(NanoBananaEditDTO request);
+    BaseResponse nanoBananaEdit(NanoBananaEditDTO request);
 
 }

@@ -22,49 +22,37 @@ public class SunoController {
     @PostMapping("/generate")
     public ResponseResult<?> generate(@Valid @RequestBody SunoGenerateDTO request) {
 
-        sunoService.sunoGenerate(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(sunoService.sunoGenerate(request));
     }
 
     @PostMapping("/extend")
     public ResponseResult<?> extend(@Valid @RequestBody SunoExtendDTO request) {
 
-        sunoService.sunoExtend(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(sunoService.sunoExtend(request));
     }
 
     @PostMapping("/upload-cover")
     public ResponseResult<?> uploadCover(@Valid @RequestBody SunoUploadCoverDTO request) {
 
-        sunoService.sunoUploadCover(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(sunoService.sunoUploadCover(request));
     }
 
     @PostMapping("/upload-extend")
     public ResponseResult<?> uploadExtend(@Valid @RequestBody SunoUploadExtendDTO request) {
 
-        sunoService.sunoUploadExtend(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(sunoService.sunoUploadExtend(request));
     }
 
     @PostMapping("/add-instrumental")
     public ResponseResult<?> addInstrumental(@Valid @RequestBody SunoAddInstrumentalDTO request) {
 
-        sunoService.sunoAddInstrumental(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(sunoService.sunoAddInstrumental(request));
     }
 
     @PostMapping("/add-vocals")
     public ResponseResult<?> addVocals(@Valid @RequestBody SunoAddVocalsDTO request) {
 
-        sunoService.sunoAddVocal(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(sunoService.sunoAddVocal(request));
     }
 
 }

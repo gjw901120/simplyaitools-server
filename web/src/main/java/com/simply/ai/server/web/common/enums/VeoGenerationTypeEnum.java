@@ -1,8 +1,11 @@
 package com.simply.ai.server.web.common.enums;
 
+import lombok.Getter;
+
 /**
  * Veo视频生成模式枚举
  */
+@Getter
 public enum VeoGenerationTypeEnum {
 
     TEXT_2_VIDEO("TEXT_2_VIDEO", "文生视频"),
@@ -15,14 +18,6 @@ public enum VeoGenerationTypeEnum {
     VeoGenerationTypeEnum(String code, String description) {
         this.code = code;
         this.description = description;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public static VeoGenerationTypeEnum getByCode(String code) {

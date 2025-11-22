@@ -29,33 +29,25 @@ public class ImageController {
     @PostMapping("/gpt4o-image/generate")
     public ResponseResult<?> gpt4oImageGenerate(@Valid @RequestBody Gpt4oImageGenerateDTO request) {
 
-        gpt4oImageService.gpt4oImageGenerate(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(gpt4oImageService.gpt4oImageGenerate(request));
     }
 
     @PostMapping("/flux-kontext/generate")
     public ResponseResult<?> fluxKontextGenerate(@Valid @RequestBody FluxKontextGenerateDTO request) {
 
-        fluxKontextService.fluxKontextGenerate(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(fluxKontextService.fluxKontextGenerate(request));
     }
 
     @PostMapping("nano-banana/generate")
     public ResponseResult<?> nanoBananaGenerate(@Valid @RequestBody NanoBananaGenerateDTO request) {
 
-        nanoBananaService.nanoBananaGenerate(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(nanoBananaService.nanoBananaGenerate(request));
     }
 
     @PostMapping("/nano-banana/edit")
     public ResponseResult<?> nanoBananaEdit(@Valid @RequestBody NanoBananaEditDTO request) {
 
-        nanoBananaService.nanoBananaEdit(request);
-
-        return ResponseResult.success();
+        return ResponseResult.success(nanoBananaService.nanoBananaEdit(request));
     }
 
 }
