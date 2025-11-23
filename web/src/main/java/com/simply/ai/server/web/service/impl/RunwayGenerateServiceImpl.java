@@ -2,6 +2,7 @@ package com.simply.ai.server.web.service.impl;
 
 import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ResponseCodeEnum;
+import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.VideoManager;
 import com.simply.ai.server.manager.model.request.RunwayAlephGenerateRequest;
 import com.simply.ai.server.manager.model.request.RunwayExtendRequest;
@@ -55,13 +56,13 @@ public class RunwayGenerateServiceImpl implements RunwayGenerateService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 
@@ -87,7 +88,7 @@ public class RunwayGenerateServiceImpl implements RunwayGenerateService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 new ArrayList<>(),
@@ -123,7 +124,7 @@ public class RunwayGenerateServiceImpl implements RunwayGenerateService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,

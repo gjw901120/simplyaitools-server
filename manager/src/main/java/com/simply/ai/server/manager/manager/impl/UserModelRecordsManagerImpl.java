@@ -1,5 +1,6 @@
 package com.simply.ai.server.manager.manager.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.simply.ai.server.manager.entity.UserModelRecords;
 import com.simply.ai.server.manager.manager.UserModelRecordsManager;
 import com.simply.ai.server.manager.mapper.UserModelRecordsMapper;
@@ -14,9 +15,23 @@ public class UserModelRecordsManagerImpl implements UserModelRecordsManager {
     private UserModelRecordsMapper userModelRecordsMapper;
 
     @Override
-    public String insert(UserModelRecords userModelTask) {
-        userModelRecordsMapper.insert(userModelTask);
-        return userModelTask.getUuid();
+    public String insert(UserModelRecords userModelRecords) {
+        userModelRecordsMapper.insert(userModelRecords);
+        return userModelRecords.getUuid();
+    }
+
+
+    @Override
+    public UserModelRecords getDetailIdByUuId(String Uuid) {
+        LambdaQueryWrapper<UserModelRecords> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper
+                .eq(UserModelRecords::getUuid, Uuid);
+        return userModelRecordsMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public Integer updateById(UserModelRecords userModelRecords) {
+        return userModelRecordsMapper.updateById(userModelRecords);
     }
 
 }

@@ -2,6 +2,7 @@ package com.simply.ai.server.web.service.impl;
 
 import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ElevenLabsResponseCodeEnum;
+import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.ElevenLabsManager;
 import com.simply.ai.server.manager.model.request.ElevenLabsAudioIsolationRequest;
 import com.simply.ai.server.manager.model.request.ElevenLabsSTTRequest;
@@ -60,13 +61,13 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 new ArrayList<>(),
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 
@@ -108,13 +109,13 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 
@@ -156,13 +157,13 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 
@@ -196,13 +197,13 @@ public class ElevenlabsServiceImpl implements ElevenlabsService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 new ArrayList<>(),
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 

@@ -2,6 +2,7 @@ package com.simply.ai.server.web.service.impl;
 
 import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ImageResponseCodeEnum;
+import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.ImageManager;
 import com.simply.ai.server.manager.model.request.FluxKontextImageRequest;
 import com.simply.ai.server.manager.model.request.Gpt4oImageGenerateRequest;
@@ -57,13 +58,13 @@ public class FluxKontextServiceImpl implements FluxKontextService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 

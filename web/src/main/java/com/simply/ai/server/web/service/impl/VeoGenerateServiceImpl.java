@@ -3,6 +3,7 @@ package com.simply.ai.server.web.service.impl;
 import com.simply.ai.server.manager.entity.UserModelRecords;
 import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ResponseCodeEnum;
+import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.VideoManager;
 import com.simply.ai.server.manager.model.response.VideoGenerateResponse;
 import com.simply.ai.server.manager.model.request.VeoGenerateRequest;
@@ -56,13 +57,13 @@ public class VeoGenerateServiceImpl implements VeoGenerateService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 
@@ -89,13 +90,13 @@ public class VeoGenerateServiceImpl implements VeoGenerateService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 new ArrayList<>(),
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 

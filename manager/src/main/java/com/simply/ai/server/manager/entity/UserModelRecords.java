@@ -25,6 +25,9 @@ public class UserModelRecords {
     @TableField("model_id")
     private Integer modelId;
 
+    @TableField("is_completed")
+    private Integer isCompleted;
+
     @TableField("gmt_completed")
     private LocalDateTime gmtCompleted;
 
@@ -44,10 +47,11 @@ public class UserModelRecords {
     /**
      * 创建新记录的便捷方法
      */
-    public static UserModelRecords create(Integer userId, Integer modelId) {
+    public static UserModelRecords create(Integer userId, Integer modelId, Integer isCompleted) {
         return UserModelRecords.builder()
                 .userId(userId)
                 .modelId(modelId)
+                .isCompleted(isCompleted)
                 .build();
     }
 

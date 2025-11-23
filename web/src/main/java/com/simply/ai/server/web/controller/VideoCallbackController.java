@@ -24,7 +24,7 @@ public class VideoCallbackController {
      * 处理Veo视频生成回调
      */
     @PostMapping("/veo")
-    public String handleVeoCallback(@Valid @RequestBody VeoCallbackRequest request) {
+    public String veoCallback(@Valid @RequestBody VeoCallbackRequest request) {
 
         videoCallbackService.VeoCallback(request);
 
@@ -35,7 +35,7 @@ public class VideoCallbackController {
      * 处理Runway视频生成回调
      */
     @PostMapping("/runway")
-    public String handleRunwayCallback(@Valid @RequestBody RunwayCallbackRequest request) {
+    public String runwayCallback(@Valid @RequestBody RunwayCallbackRequest request) {
 
         videoCallbackService.RunwayCallback(request);
 
@@ -46,7 +46,7 @@ public class VideoCallbackController {
      * 处理RunwayAleph视频生成回调
      */
     @PostMapping("/runway-aleph")
-    public String handleRunwayAlephCallback(@Valid @RequestBody RunwayAlephCallbackRequest request) {
+    public String runwayAlephCallback(@Valid @RequestBody RunwayAlephCallbackRequest request) {
 
         videoCallbackService.RunwayAlephCallback(request);
 
@@ -57,7 +57,7 @@ public class VideoCallbackController {
      * 处理Luma视频生成回调
      */
     @PostMapping("/luma")
-    public String handleLumaCallback(@Valid @RequestBody LumaCallbackRequest request) {
+    public String lumaCallback(@Valid @RequestBody LumaCallbackRequest request) {
 
         videoCallbackService.LumaCallback(request);
 
@@ -68,7 +68,7 @@ public class VideoCallbackController {
      * 处理Sora视频生成回调
      */
     @PostMapping("/sora")
-    public String handleSoraCallback(@Valid @RequestBody SoraCallbackRequest request) {
+    public String soraCallback(@Valid @RequestBody SoraCallbackRequest request) {
 
         videoCallbackService.SoraCallback(request);
 

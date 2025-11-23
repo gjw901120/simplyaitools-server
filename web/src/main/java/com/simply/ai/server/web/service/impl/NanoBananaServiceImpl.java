@@ -4,6 +4,7 @@ import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ImageResponseCodeEnum;
 import com.simply.ai.server.manager.enums.NanoBananaAspectRatioEnum;
 import com.simply.ai.server.manager.enums.NanoBananaOutputFormatEnum;
+import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.ImageManager;
 import com.simply.ai.server.manager.model.request.NanoBananaEditRequest;
 import com.simply.ai.server.manager.model.request.NanoBananaGenerateRequest;
@@ -56,7 +57,7 @@ public class NanoBananaServiceImpl implements NanoBananaService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 new ArrayList<>(),
@@ -101,7 +102,7 @@ public class NanoBananaServiceImpl implements NanoBananaService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,

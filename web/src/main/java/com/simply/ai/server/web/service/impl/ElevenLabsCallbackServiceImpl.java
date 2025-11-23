@@ -4,9 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simply.ai.server.web.model.dto.request.callback.elevenlabs.*;
 import com.simply.ai.server.web.common.enums.ElevenLabsModelEnum;
 import com.simply.ai.server.web.service.ElevenLabsCallbackService;
+import com.simply.ai.server.web.service.RecordsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ElevenLabs回调服务实现
@@ -16,7 +21,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ElevenLabsCallbackServiceImpl implements ElevenLabsCallbackService {
 
+    @Autowired
     private final ObjectMapper objectMapper;
+
+    @Autowired
+    private RecordsService recordsService;
 
     @Override
     public void processCallback(ElevenLabsCallbackRequest request) {
@@ -43,6 +52,7 @@ public class ElevenLabsCallbackServiceImpl implements ElevenLabsCallbackService 
                     request.getData().getTaskId());
 
         } catch (Exception e) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("Failed to process ElevenLabs callback: taskId={}, error={}",
                     request.getData().getTaskId(), e.getMessage(), e);
             throw new RuntimeException("ElevenLabs callback processing failed", e);
@@ -65,20 +75,22 @@ public class ElevenLabsCallbackServiceImpl implements ElevenLabsCallbackService 
                         taskId, result.getResultUrls());
 
                 // 更新任务状态为成功
-                updateTaskStatus(taskId, "SUCCESS", result.getResultUrls(), null);
+                List<String> outputUrl = new ArrayList<>();
+                recordsService.completed(request.getData().getTaskId(), outputUrl, request);
 
             } else if ("fail".equals(state)) {
                 // 处理失败情况
                 log.error("TTS task failed: taskId={}, failMsg={}",
                         taskId, request.getData().getFailMsg());
 
-                updateTaskStatus(taskId, "FAILED", null, request.getData().getFailMsg());
+                recordsService.failed(request.getData().getTaskId(), request);
             }
 
             // 记录积分消耗
-            recordCreditConsumption(taskId, request.getData().getConsumeCredits());
+
 
         } catch (Exception e) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("Failed to process TTS callback: taskId={}, error={}",
                     request.getData().getTaskId(), e.getMessage(), e);
             throw new RuntimeException("TTS callback processing failed", e);
@@ -108,18 +120,18 @@ public class ElevenLabsCallbackServiceImpl implements ElevenLabsCallbackService 
                 }
 
                 // 更新任务状态为成功
-                updateTaskStatus(taskId, "SUCCESS", null, resultJson);
+                List<String> outputUrl = new ArrayList<>();
+                recordsService.completed(request.getData().getTaskId(), outputUrl, request);
 
             } else if ("fail".equals(state)) {
                 log.error("STT task failed: taskId={}, failMsg={}",
                         taskId, request.getData().getFailMsg());
 
-                updateTaskStatus(taskId, "FAILED", null, request.getData().getFailMsg());
+                recordsService.failed(request.getData().getTaskId(), request);
             }
 
-            recordCreditConsumption(taskId, request.getData().getConsumeCredits());
-
         } catch (Exception e) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("Failed to process STT callback: taskId={}, error={}",
                     request.getData().getTaskId(), e.getMessage(), e);
             throw new RuntimeException("STT callback processing failed", e);
@@ -140,18 +152,18 @@ public class ElevenLabsCallbackServiceImpl implements ElevenLabsCallbackService 
                 log.info("Audio isolation task completed: taskId={}, resultUrls={}",
                         taskId, result.getResultUrls());
 
-                updateTaskStatus(taskId, "SUCCESS", result.getResultUrls(), null);
+                List<String> outputUrl = new ArrayList<>();
+                recordsService.completed(request.getData().getTaskId(), outputUrl, request);
 
             } else if ("fail".equals(state)) {
                 log.error("Audio isolation task failed: taskId={}, failMsg={}",
                         taskId, request.getData().getFailMsg());
 
-                updateTaskStatus(taskId, "FAILED", null, request.getData().getFailMsg());
+                recordsService.failed(request.getData().getTaskId(), request);
             }
 
-            recordCreditConsumption(taskId, request.getData().getConsumeCredits());
-
         } catch (Exception e) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("Failed to process audio isolation callback: taskId={}, error={}",
                     request.getData().getTaskId(), e.getMessage(), e);
             throw new RuntimeException("Audio isolation callback processing failed", e);
@@ -171,45 +183,22 @@ public class ElevenLabsCallbackServiceImpl implements ElevenLabsCallbackService 
                 ElevenLabsSoundEffectParam.SoundEffectResult result = objectMapper.readValue(resultJson, ElevenLabsSoundEffectParam.SoundEffectResult.class);
                 log.info("Sound effect task completed: taskId={}, resultUrls={}",
                         taskId, result.getResultUrls());
-
-                updateTaskStatus(taskId, "SUCCESS", result.getResultUrls(), null);
+                List<String> outputUrl = new ArrayList<>();
+                recordsService.completed(request.getData().getTaskId(), outputUrl, request);
 
             } else if ("fail".equals(state)) {
                 log.error("Sound effect task failed: taskId={}, failMsg={}",
                         taskId, request.getData().getFailMsg());
 
-                updateTaskStatus(taskId, "FAILED", null, request.getData().getFailMsg());
+                recordsService.failed(request.getData().getTaskId(), request);
             }
 
-            recordCreditConsumption(taskId, request.getData().getConsumeCredits());
-
         } catch (Exception e) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("Failed to process sound effect callback: taskId={}, error={}",
                     request.getData().getTaskId(), e.getMessage(), e);
             throw new RuntimeException("Sound effect callback processing failed", e);
         }
     }
 
-    /**
-     * 更新任务状态
-     */
-    private void updateTaskStatus(String taskId, String status, Object result, String errorMessage) {
-        // TODO: 实现更新任务状态的逻辑
-        log.info("Updating task status: taskId={}, status={}, result={}, error={}",
-                taskId, status, result, errorMessage);
-
-        // 示例实现：
-        // taskService.updateTaskStatus(taskId, status, result, errorMessage);
-    }
-
-    /**
-     * 记录积分消耗
-     */
-    private void recordCreditConsumption(String taskId, Integer credits) {
-        // TODO: 实现记录积分消耗的逻辑
-        log.info("Recording credit consumption: taskId={}, credits={}", taskId, credits);
-
-        // 示例实现：
-        // creditService.recordConsumption(taskId, credits);
-    }
 }

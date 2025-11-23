@@ -3,6 +3,7 @@ package com.simply.ai.server.web.service.impl;
 import com.simply.ai.server.manager.entity.UserModelRecords;
 import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ResponseCodeEnum;
+import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.ModelsManager;
 import com.simply.ai.server.manager.manager.UserModelRecordsManager;
 import com.simply.ai.server.manager.manager.UserModelTaskManager;
@@ -59,13 +60,13 @@ public class LumaGenerateServiceImpl implements LumaGenerateService {
                 "",
                 0,
                 0,
-                1,
+                TaskStatusEnum.PROCESSING,
                 "",
                 response.getData().getTaskId(),
                 inputUrls,
                 new ArrayList<>(),
                 request,
-                new HashMap<>(),
+                response,
                 new HashMap<>()
         );
 

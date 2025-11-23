@@ -1,11 +1,13 @@
 package com.simply.ai.server.manager.manager.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.manager.UserModelTaskManager;
 import com.simply.ai.server.manager.mapper.UserModelTaskMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+
 
 @Component
 public class UserModelTaskManagerImpl implements UserModelTaskManager {
@@ -17,6 +19,20 @@ public class UserModelTaskManagerImpl implements UserModelTaskManager {
     public Integer insert(UserModelTask userModelTask) {
         userModelTaskMapper.insert(userModelTask);
         return userModelTask.getId();
+    }
+
+    @Override
+    public UserModelTask getDetailIdByTaskId(String thirdTaskId) {
+        LambdaQueryWrapper<UserModelTask> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper
+            .eq(UserModelTask::getThirdTaskId, thirdTaskId)
+            .eq(UserModelTask::getIsDel, 0);
+        return userModelTaskMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public Integer updateById(UserModelTask userModelTask) {
+        return userModelTaskMapper.updateById(userModelTask);
     }
 
 

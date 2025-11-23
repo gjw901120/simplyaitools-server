@@ -6,21 +6,30 @@ import com.simply.ai.server.web.model.dto.request.callback.suno.SunoUploadCoverR
 import com.simply.ai.server.web.model.dto.request.callback.suno.SunoUploadExtendRequest;
 import com.simply.ai.server.web.model.dto.request.callback.suno.SunoAddInstrumentalRequest;
 import com.simply.ai.server.web.model.dto.request.callback.suno.SunoAddVocalsRequest;
+import com.simply.ai.server.web.service.RecordsService;
 import com.simply.ai.server.web.service.SunoCallbackService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class SunoCallbackServiceImpl implements SunoCallbackService {
 
+    @Autowired
+    private RecordsService recordsService;
+
     @Override
     public void generateCallback(SunoGenerateRequest request) {
         log.info("处理生成音乐回调: code={}, msg={}", request.getCode(), request.getMsg());
 
         if (!request.isSuccess()) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("生成音乐失败: code={}, msg={}", request.getCode(), request.getMsg());
             return;
         }
@@ -32,6 +41,8 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
                         audio.getId(), audio.getTitle(), audio.getDuration());
                 // 处理生成音乐的业务逻辑
             });
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
         }
     }
 
@@ -40,6 +51,7 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
         log.info("处理延长音乐回调: code={}, msg={}", request.getCode(), request.getMsg());
 
         if (!request.isSuccess()) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("延长音乐失败: code={}, msg={}", request.getCode(), request.getMsg());
             return;
         }
@@ -51,6 +63,8 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
                         audio.getId(), audio.getTitle(), audio.getDuration());
                 // 处理延长音乐的业务逻辑
             });
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
         }
     }
 
@@ -59,6 +73,7 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
         log.info("处理上传翻唱回调: code={}, msg={}", request.getCode(), request.getMsg());
 
         if (!request.isSuccess()) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("上传翻唱失败: code={}, msg={}", request.getCode(), request.getMsg());
             return;
         }
@@ -70,6 +85,8 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
                         audio.getId(), audio.getTitle(), audio.getSourceAudioUrl());
                 // 处理上传翻唱的业务逻辑
             });
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
         }
     }
 
@@ -78,6 +95,7 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
         log.info("处理上传扩展回调: code={}, msg={}", request.getCode(), request.getMsg());
 
         if (!request.isSuccess()) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("上传扩展失败: code={}, msg={}", request.getCode(), request.getMsg());
             return;
         }
@@ -89,6 +107,8 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
                         audio.getId(), audio.getTitle(), audio.getSourceAudioUrl());
                 // 处理上传扩展的业务逻辑
             });
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
         }
     }
 
@@ -97,6 +117,7 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
         log.info("处理添加伴奏回调: code={}, msg={}", request.getCode(), request.getMsg());
 
         if (!request.isSuccess()) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("添加伴奏失败: code={}, msg={}", request.getCode(), request.getMsg());
             return;
         }
@@ -108,6 +129,8 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
                         audio.getId(), audio.getTitle(), audio.getDuration());
                 // 处理添加伴奏的业务逻辑
             });
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
         }
     }
 
@@ -116,6 +139,7 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
         log.info("处理添加人声回调: code={}, msg={}", request.getCode(), request.getMsg());
 
         if (!request.isSuccess()) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("添加人声失败: code={}, msg={}", request.getCode(), request.getMsg());
             return;
         }
@@ -127,6 +151,8 @@ public class SunoCallbackServiceImpl implements SunoCallbackService {
                         audio.getId(), audio.getTitle(), audio.getDuration());
                 // 处理添加人声的业务逻辑
             });
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
         }
     }
 }

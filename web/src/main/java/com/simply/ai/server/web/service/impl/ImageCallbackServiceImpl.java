@@ -1,11 +1,17 @@
 package com.simply.ai.server.web.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.simply.ai.server.web.common.enums.VideoRequestCodeEnum;
 import com.simply.ai.server.web.model.dto.request.callback.image.*;
 import com.simply.ai.server.web.service.ImageCallbackService;
+import com.simply.ai.server.web.service.RecordsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 图像回调服务实现
@@ -15,7 +21,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ImageCallbackServiceImpl implements ImageCallbackService {
 
+    @Autowired
     private final ObjectMapper objectMapper;
+
+    @Autowired
+    private RecordsService recordsService;
 
     @Override
     public void processGpt4oCallback(ImageGpt4oCallbackRequest request) {
@@ -30,10 +40,14 @@ public class ImageCallbackServiceImpl implements ImageCallbackService {
             String[] resultUrls = request.getData().getInfo().getResultUrls();
             log.info("GPT-4O image generation completed: taskId={}, resultUrls={}", taskId, resultUrls);
 
-            updateTaskStatus(taskId, "SUCCESS", resultUrls, null);
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
 
         } else {
+
+            recordsService.failed(request.getData().getTaskId(), request);
             log.info("Failed to process GPT-4O callback: taskId={}, info={}", request.getData().getTaskId(), request);
+
         }
 
     }
@@ -53,10 +67,14 @@ public class ImageCallbackServiceImpl implements ImageCallbackService {
 
             log.info("Flux Kontext image generation completed: taskId={}, originUrl={}, resultUrl={}", taskId, originImageUrl, resultImageUrl);
 
-            updateTaskStatus(taskId, "SUCCESS", new String[]{resultImageUrl}, null);
+            List<String> outputUrl = new ArrayList<>();
+            recordsService.completed(request.getData().getTaskId(), outputUrl, request);
 
         } else {
+
+            recordsService.failed(request.getData().getTaskId(), request);
             log.info("Failed to process Flux Kontext callback: taskId={}, info={}", request.getData().getTaskId(), request);
+
         }
 
     }
@@ -77,36 +95,19 @@ public class ImageCallbackServiceImpl implements ImageCallbackService {
 
                 log.info("Nano Banana image generation completed: taskId={}, resultUrls={}", taskId, result.getResultUrls());
 
-                updateTaskStatus(taskId, "SUCCESS", result.getResultUrls(), null);
-
-                // 记录积分消耗
-                recordCreditConsumption(taskId, request.getData().getConsumeCredits());
+                List<String> outputUrl = new ArrayList<>();
+                recordsService.completed(request.getData().getTaskId(), outputUrl, request);
 
             } else if ("fail".equals(state)) {
                 log.info("Nano Banana image generation failed: taskId={}, info={}", taskId, request);
 
-                updateTaskStatus(taskId, "FAILED", null, "Image generation failed");
+                recordsService.failed(request.getData().getTaskId(), request);
             }
 
         } catch (Exception e) {
+            recordsService.failed(request.getData().getTaskId(), request);
             log.error("Failed to process Nano Banana callback: taskId={}, error={}", request.getData().getTaskId(), e);
         }
     }
 
-    /**
-     * 更新任务状态
-     */
-    private void updateTaskStatus(String taskId, String status, Object result, String errorMessage) {
-        // TODO: 实现更新任务状态的逻辑
-        log.info("Updating image task status: taskId={}, status={}, result={}, error={}",
-                taskId, status, result, errorMessage);
-    }
-
-    /**
-     * 记录积分消耗
-     */
-    private void recordCreditConsumption(String taskId, Integer credits) {
-        // TODO: 实现记录积分消耗的逻辑
-        log.info("Recording image task credit consumption: taskId={}, credits={}", taskId, credits);
-    }
 }

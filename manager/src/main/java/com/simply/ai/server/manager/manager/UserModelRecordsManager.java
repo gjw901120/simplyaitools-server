@@ -6,4 +6,8 @@ public interface UserModelRecordsManager {
 
     String insert(UserModelRecords userModelRecords);
 
+    UserModelRecords getDetailIdByUuId(String Uuid);
+
+    Integer updateById(UserModelRecords userModelRecords);
+
 }
