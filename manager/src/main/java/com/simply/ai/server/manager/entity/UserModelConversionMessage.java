@@ -1,6 +1,7 @@
 package com.simply.ai.server.manager.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -20,13 +21,17 @@ public class UserModelConversionMessage {
 
     private Integer modelId;
 
-    private Integer conversionId;
+    private String conversionId;
 
     private Integer role;
 
     private String message;
 
-    private String files;
+    @TableField(value = "files", typeHandler = JacksonTypeHandler.class)
+    private Object files;
+
+    @TableField(value = "third_files", typeHandler = JacksonTypeHandler.class)
+    private Object thirdFiles;
 
     private Integer promptTokens;
 
@@ -45,7 +50,7 @@ public class UserModelConversionMessage {
      * 创建消息对象的便捷方法
      */
     public static UserModelConversionMessage create(Integer userId, Integer modelId,
-                                                    Integer conversionId, Integer role,
+                                                    String conversionId, Integer role,
                                                     String message, String files,
                                                     Integer promptTokens, Integer completionTokens) {
         return UserModelConversionMessage.builder()

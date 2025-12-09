@@ -16,6 +16,8 @@ public class UserModelConversion {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
+    private String uuid;
+
     private Integer userId;
 
     private String recordId;
@@ -36,9 +38,10 @@ public class UserModelConversion {
     /**
      * 创建对话对象的便捷方法
      */
-    public static UserModelConversion create(Integer userId, String recordId, Integer modelId, String title) {
+    public static UserModelConversion create(Integer userId, String uuid, String recordId, Integer modelId, String title) {
         return UserModelConversion.builder()
                 .userId(userId)
+                .uuid(uuid)
                 .recordId(recordId)
                 .modelId(modelId)
                 .title(title)

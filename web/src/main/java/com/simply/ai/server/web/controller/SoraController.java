@@ -1,7 +1,10 @@
 package com.simply.ai.server.web.controller;
 
 
-import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.request.video.SoraGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.video.SoraProGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.video.SoraProStoryboardDTO;
+import com.simply.ai.server.web.model.dto.request.video.SoraWatermarkRemoverDTO;
 import com.simply.ai.server.web.service.SoraGenerateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

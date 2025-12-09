@@ -18,6 +18,12 @@ public class Models {
 
     private String name;
 
+    private String requestName;
+
+    private String requestToken;
+
+    private String originalToken;
+
     private ModelTypeEnum type;
 
     private Integer isPricingRules;

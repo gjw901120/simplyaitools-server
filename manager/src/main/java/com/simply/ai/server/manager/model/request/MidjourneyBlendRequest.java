@@ -2,23 +2,22 @@ package com.simply.ai.server.manager.model.request;
 
 import com.simply.ai.server.manager.constant.MidjourneyConstant;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serial;
 import java.util.List;
 
 /**
  * Blend 任务请求参数
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class MidjourneyBlendRequest extends MidjourneyBaseRequest {
+public class MidjourneyBlendRequest {
 
-    @Serial
     private static final long serialVersionUID = 1L;
+
+    private String botType = "MID_JOURNEY";
 
     /**
      * 要混合的图片 base64 编码数组
@@ -33,9 +32,14 @@ public class MidjourneyBlendRequest extends MidjourneyBaseRequest {
      */
     private Dimensions dimensions = Dimensions.SQUARE;
 
+    private String notifyHook;
+
+    private String state;
+
     /**
      * 图片尺寸枚举（内部枚举）
      */
+    @Getter
     public enum Dimensions {
         PORTRAIT("PORTRAIT", "2:3 比例", "竖版"),
         SQUARE("SQUARE", "1:1 比例", "正方形"),
@@ -51,18 +55,6 @@ public class MidjourneyBlendRequest extends MidjourneyBaseRequest {
             this.type = type;
         }
 
-        public String getCode() {
-            return code;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public String getType() {
-            return type;
-        }
-
         public static Dimensions getByCode(String code) {
             for (Dimensions value : values()) {
                 if (value.getCode().equals(code)) {
@@ -71,50 +63,6 @@ public class MidjourneyBlendRequest extends MidjourneyBaseRequest {
             }
             return null;
         }
-    }
-
-    /**
-     * 构建 Blend 请求
-     */
-    public static MidjourneyBlendRequest build(List<String> base64Array, Dimensions dimensions) {
-        MidjourneyBlendRequest request = new MidjourneyBlendRequest();
-        request.setBase64Array(base64Array);
-        request.setDimensions(dimensions);
-        return request;
-    }
-
-    /**
-     * 流式构建方法
-     */
-    public static MidjourneyBlendRequest create(List<String> base64Array) {
-        return new MidjourneyBlendRequest().withBase64Array(base64Array);
-    }
-
-    /**
-     * 设置图片数组
-     */
-    public MidjourneyBlendRequest withBase64Array(List<String> base64Array) {
-        this.base64Array = base64Array;
-        return this;
-    }
-
-    /**
-     * 设置尺寸
-     */
-    public MidjourneyBlendRequest withDimensions(Dimensions dimensions) {
-        this.dimensions = dimensions;
-        return this;
-    }
-
-    /**
-     * 添加单个图片
-     */
-    public MidjourneyBlendRequest addBase64Image(String base64Image) {
-        if (this.base64Array == null) {
-            this.base64Array = new java.util.ArrayList<>();
-        }
-        this.base64Array.add(base64Image);
-        return this;
     }
 
     /**

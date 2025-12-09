@@ -1,7 +1,6 @@
 package com.simply.ai.server.web.controller;
 
-import com.simply.ai.server.web.model.dto.request.*;
-import com.simply.ai.server.web.service.NanoBananaService;
+import com.simply.ai.server.web.model.dto.request.suno.*;
 import com.simply.ai.server.web.service.SunoService;
 import com.simply.common.core.entity.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;

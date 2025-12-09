@@ -3,13 +3,12 @@ package com.simply.ai.server.manager.model.request;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 /**
  * Swap Face 任务请求参数
  */
 @Data
-public class MidjourneySwapFaceRequest implements Serializable {
+public class MidjourneySwapFaceRequest {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +23,10 @@ public class MidjourneySwapFaceRequest implements Serializable {
      */
     @NotBlank(message = "目标图片不能为空")
     private String targetBase64;
+
+    private String notifyHook;
+
+    private String state;
 
     /**
      * 构建 Swap Face 请求

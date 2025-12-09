@@ -1,6 +1,9 @@
 package com.simply.ai.server.web.controller;
 
-import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.request.image.Gpt4oImageGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.image.NanoBananaEditDTO;
+import com.simply.ai.server.web.model.dto.request.image.NanoBananaGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.image.FluxKontextGenerateDTO;
 import com.simply.ai.server.web.service.FluxKontextService;
 import com.simply.ai.server.web.service.Gpt4oImageService;
 import com.simply.ai.server.web.service.NanoBananaService;

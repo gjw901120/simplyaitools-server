@@ -1,9 +1,8 @@
 package com.simply.ai.server.web.controller;
 
-import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.request.video.*;
 import com.simply.ai.server.web.service.LumaGenerateService;
 import com.simply.ai.server.web.service.RunwayGenerateService;
-import com.simply.ai.server.web.service.SoraGenerateService;
 import com.simply.ai.server.web.service.VeoGenerateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

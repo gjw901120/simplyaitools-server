@@ -1,9 +1,9 @@
 package com.simply.ai.server.web.controller;
 
-import com.simply.ai.server.web.model.dto.request.ElevenlabsAudioIsolationDTO;
-import com.simply.ai.server.web.model.dto.request.ElevenlabsSTTDTO;
-import com.simply.ai.server.web.model.dto.request.ElevenlabsSoundEffectDTO;
-import com.simply.ai.server.web.model.dto.request.ElevenlabsTTSDTO;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsAudioIsolationDTO;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsSTTDTO;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsSoundEffectDTO;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsTTSDTO;
 import com.simply.ai.server.web.service.ElevenlabsService;
 import com.simply.common.core.entity.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -40,10 +40,26 @@ mybatis-plus:
   configuration:
     default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
 
-rocketmq:
-  accessKey: XXX
-  secretKey: XX
-  nameSrvAddr: XXX
-  topic: XXX
-  groupId: XXX
-  tag: A
+# 邮件配置
+mail:
+  host: smtp.qq.com
+  port: 587
+  username: your-email@qq.com
+  password: your-auth-code
+  default-encoding: UTF-8
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+          required: true
+
+# 自定义配置
+app:
+  # 验证码配置
+  code:
+    expire-minutes: 5          # 验证码有效期
+    max-daily-per-email: 10     # 每个邮箱每日最多发送次数
+    max-daily-per-ip: 30       # 每个IP每日最多发送次数
+    max-global-daily: 1000     # 系统全局每日最多发送次数

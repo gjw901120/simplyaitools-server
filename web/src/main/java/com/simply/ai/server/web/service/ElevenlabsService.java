@@ -1,6 +1,9 @@
 package com.simply.ai.server.web.service;
 
-import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsAudioIsolationDTO;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsSTTDTO;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsSoundEffectDTO;
+import com.simply.ai.server.web.model.dto.request.elevenlabs.ElevenlabsTTSDTO;
 import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 public interface ElevenlabsService {

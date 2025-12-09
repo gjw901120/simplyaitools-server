@@ -1,7 +1,7 @@
 package com.simply.ai.server.web.service;
 
-import com.simply.ai.server.web.model.dto.request.VeoExtendDTO;
-import com.simply.ai.server.web.model.dto.request.VeoGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.video.VeoExtendDTO;
+import com.simply.ai.server.web.model.dto.request.video.VeoGenerateDTO;
 import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 

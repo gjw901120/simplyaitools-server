@@ -1,17 +1,12 @@
 package com.simply.ai.server.web.service.impl;
 
-import com.simply.ai.server.manager.entity.UserModelRecords;
 import com.simply.ai.server.manager.entity.UserModelTask;
 import com.simply.ai.server.manager.enums.ResponseCodeEnum;
 import com.simply.ai.server.manager.enums.TaskStatusEnum;
-import com.simply.ai.server.manager.manager.ModelsManager;
-import com.simply.ai.server.manager.manager.UserModelRecordsManager;
-import com.simply.ai.server.manager.manager.UserModelTaskManager;
 import com.simply.ai.server.manager.manager.VideoManager;
 import com.simply.ai.server.manager.model.request.LumaGenerateRequest;
 import com.simply.ai.server.manager.model.response.VideoGenerateResponse;
-import com.simply.ai.server.web.common.enums.VeoGenerationTypeEnum;
-import com.simply.ai.server.web.model.dto.request.LumaGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.video.LumaGenerateDTO;
 import com.simply.ai.server.web.model.dto.response.BaseResponse;
 import com.simply.ai.server.web.service.LumaGenerateService;
 import com.simply.ai.server.web.service.RecordsService;

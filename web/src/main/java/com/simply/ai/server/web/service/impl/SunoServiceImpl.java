@@ -6,7 +6,7 @@ import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.SunoManger;
 import com.simply.ai.server.manager.model.request.*;
 import com.simply.ai.server.manager.model.response.SunoMusicResponse;
-import com.simply.ai.server.web.model.dto.request.*;
+import com.simply.ai.server.web.model.dto.request.suno.*;
 import com.simply.ai.server.web.model.dto.response.BaseResponse;
 import com.simply.ai.server.web.service.RecordsService;
 import com.simply.ai.server.web.service.SunoService;

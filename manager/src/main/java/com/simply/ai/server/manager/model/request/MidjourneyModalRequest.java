@@ -3,13 +3,12 @@ package com.simply.ai.server.manager.model.request;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 /**
  * Modal 任务请求参数
  */
 @Data
-public class MidjourneyModalRequest implements Serializable {
+public class MidjourneyModalRequest {
 
     private static final long serialVersionUID = 1L;
 

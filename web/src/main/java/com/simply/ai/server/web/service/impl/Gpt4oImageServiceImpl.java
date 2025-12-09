@@ -6,7 +6,7 @@ import com.simply.ai.server.manager.enums.TaskStatusEnum;
 import com.simply.ai.server.manager.manager.ImageManager;
 import com.simply.ai.server.manager.model.request.Gpt4oImageGenerateRequest;
 import com.simply.ai.server.manager.model.response.ImageGenerateResponse;
-import com.simply.ai.server.web.model.dto.request.Gpt4oImageGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.image.Gpt4oImageGenerateDTO;
 import com.simply.ai.server.web.model.dto.response.BaseResponse;
 import com.simply.ai.server.web.service.Gpt4oImageService;
 import com.simply.ai.server.web.service.RecordsService;

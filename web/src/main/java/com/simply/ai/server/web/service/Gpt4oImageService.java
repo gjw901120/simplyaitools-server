@@ -1,6 +1,6 @@
 package com.simply.ai.server.web.service;
 
-import com.simply.ai.server.web.model.dto.request.Gpt4oImageGenerateDTO;
+import com.simply.ai.server.web.model.dto.request.image.Gpt4oImageGenerateDTO;
 import com.simply.ai.server.web.model.dto.response.BaseResponse;
 
 public interface Gpt4oImageService {
